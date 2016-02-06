@@ -38,10 +38,8 @@ public class EasyMove : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-
 		GetComponent<Rigidbody2D>().velocity = new Vector2 (movex * movexChange * Speed, movey * Speed);
 	}
-
 
 
 }
