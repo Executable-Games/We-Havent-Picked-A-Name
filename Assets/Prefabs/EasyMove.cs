@@ -6,7 +6,7 @@ public class EasyMove : MonoBehaviour {
 	public float Speed = 0f;
 	private float movex = 0f;
 	private float movey = 0f;
-	private float movexChange = 0f;
+	private float movexChange = 1f;
 	public float desiredScale =0f;
 
 	// Use this for initialization
