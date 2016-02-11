@@ -2,7 +2,8 @@
 ## Yes, that's right, we've got a SKELETON for COMBAT
 ### wut wut
 
-![s/booty/combat](http://media.giphy.com/media/A7mrYIaSrEl20/giphy.gif)
+![s/booty/combat](https://github.com/Executable-Games/We-Havent-Picked-A-Name/blob/combat-and-other-updates/dat-combat.gif?raw=true)
+
 > ^ srs combat gais, am telling u
 
 ## Ok so stop flapjacking around and tell us the digs
