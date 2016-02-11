@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Unit script for managing combat units
+/// </summary>
+/// Author: Jordan (GitHub: @skorlir)
+/// 2/11/16
 public class Unit : MonoBehaviour {
 
     /// <summary>
