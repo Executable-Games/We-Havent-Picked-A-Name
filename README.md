@@ -2,7 +2,7 @@
 ## Yes, that's right, we've got a SKELETON for COMBAT
 ### wut wut
 
-![s/booty/combat](https://media.giphy.com/media/A7mrYIaSrEl20/giphy.gif)
+![s/booty/combat](http://media.giphy.com/media/A7mrYIaSrEl20/giphy.gif)
 > ^ srs combat gais, am telling u
 
 ## Ok so stop flapjacking around and tell us the digs
