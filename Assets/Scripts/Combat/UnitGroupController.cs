@@ -8,7 +8,7 @@ using System.Collections;
 /// 2/11/16
 public class UnitGroupController : MonoBehaviour {
 
-    public Timer Timer;
+    private Timer Timer;
 
     // Use this for initialization
     void Start () {

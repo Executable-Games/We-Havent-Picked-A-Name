@@ -34,7 +34,7 @@ public class CombatUIController : MonoBehaviour {
     void Start () {
         // NOTE(jordan): since CombatUI is a child of CombatController this works
         CombatTimer = GetComponentInParent<Timer>();
-        // NOTE(jordan): this only works because CombatUI only has 1 child, and it's a UI.Text object
+        // NOTE(jordan): this only works because CombatUI only has 1 child, and it's the MessagePanel
         UIMessagePanel  = gameObject.transform.GetChild(0).gameObject;
         UITextContainer = UIMessagePanel.transform.GetChild(0).gameObject;
         UIText          = UITextContainer.GetComponent<Text>();

@@ -59,7 +59,7 @@ public class CombatController : MonoBehaviour {
             playerTurn = !playerTurn;
             // NOTE(jordan): set ui message
             uiController.SetMessage(TurnOverMessage());
-            // NOTE(jordan): show message for 3 seconds (needs to be less than turnInterval or it will show and hide at the same time ;) )
+            // NOTE(jordan): show message for 1/2 turnInterval seconds (needs to be less than turnInterval or it will show and hide at the same time ;) )
             uiController.Show(turnInterval / 2f);
         });
     }

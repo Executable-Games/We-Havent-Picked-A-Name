@@ -14,10 +14,8 @@ public class Unit : MonoBehaviour {
     public bool isEnemy = true;
 
     void Start () {
-        GameObject parent = transform.parent.gameObject;
-        UnitGroupController parentController = parent.GetComponent<UnitGroupController>();
-        Timer Timer = parentController.Timer;
+        Timer Timer = GetComponentInParent<Timer>();
 
-        Timer.After(5, () => Debug.Log("Hello from Unit!"));
+        Timer.After(0.25f, () => Debug.Log("Hello from Unit!"));
     }
 }
