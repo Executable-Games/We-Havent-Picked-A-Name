@@ -79,3 +79,9 @@ So there's a lot of other shit, too, but that's most of it
 When we meet up tomorrow we can talk it all over.
 
 Until then! Wop.
+
+
+-- - EDIT
+
+I've also added a TODO.md to the project. Peruse it at your leisure; we can
+go over it later today/tomorrow/Thursday/whatever. Time is irrelevant.
