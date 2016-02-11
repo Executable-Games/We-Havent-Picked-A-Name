@@ -61,7 +61,8 @@ We can move these into GitHub issues tomorrow
         * And in those folders we can define all the cool attacks different
           units can/do have
         * _yeah, organization, mannn_
-        * [size=1]420blazeit[/size] (oh shit this isn't BBCode compatible?)
+        * [size=1]420blazeit[/size]
+        * (oh shit this isn't BBCode compatible?)
   * ATTACK SELECTION + UI
     * We need an Attack Selection modal
     * An Attack Selection pointer (like an arrow to the character you are
