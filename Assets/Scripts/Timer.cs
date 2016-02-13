@@ -33,18 +33,6 @@ public class Timer : MonoBehaviour {
     }
 
     /// <summary>
-    /// IntervalActionSet for keeping track of lists of callbacks and whether they have been run yet
-    /// </summary>
-    private struct IntervalActionSet {
-        public List<IntervalAction> intervalActions;
-
-        public IntervalActionSet (IntervalAction firstAction) {
-            intervalActions = new List<IntervalAction>();
-            intervalActions.Add(firstAction);
-        }
-    }
-
-    /// <summary>
     /// Intervals for easy iteration without creating a new List on each Update()
     /// </summary>
     List<float> Intervals = new List<float>();
@@ -52,7 +40,7 @@ public class Timer : MonoBehaviour {
     /// <summary>
     /// Dictionary for quick access of IntervalActionSets for a given interval
     /// </summary>
-    private Dictionary<float, IntervalActionSet> IntervalActions = new Dictionary<float, IntervalActionSet>();
+    private Dictionary<float, List<IntervalAction>> IntervalActions = new Dictionary<float, List<IntervalAction>>();
 
     /// <summary>
     /// Reset timer: set cumulative timer back to 0
@@ -66,19 +54,21 @@ public class Timer : MonoBehaviour {
     /// </summary>
     /// <param name="t">Interval interval (float)</param>
     /// <param name="initialAction">Action being added for that interval</param>
-    private void NewInterval (float t, Action initialAction) {
-        Intervals.Add(t);
-
-        IntervalAction action = new IntervalAction(initialAction);
-        action.lastRunTime = timer;
-
-        IntervalActions.Add(t, new IntervalActionSet(action));
-    }
-
-    /// <see cref="NewInterval(float, Action)"/>
     private void NewInterval (float t, IntervalAction initialAction) {
         Intervals.Add(t);
-        IntervalActions.Add(t, new IntervalActionSet(initialAction));
+
+        initialAction.lastRunTime = timer;
+
+        List<IntervalAction> intervalActionSet = new List<IntervalAction>();
+        intervalActionSet.Add(initialAction);
+
+        IntervalActions.Add(t, intervalActionSet);
+    }
+
+    /// <see cref="NewInterval(float, IntervalAction)"/>
+    private void NewInterval (float t, Action initialAction) {
+        IntervalAction action = new IntervalAction(initialAction);
+        NewInterval(t, action);
     }
 
     /// <summary>
@@ -87,7 +77,7 @@ public class Timer : MonoBehaviour {
     /// <param name="interval">Interval (in high-precision part-seconds) to call callback on</param>
     /// <param name="callback">Callback to call</param>
     public void Every (float interval, Action callback) {
-        IntervalActionSet ias;
+        List<IntervalAction> ias = new List<IntervalAction>();
 
         if (IntervalActions.ContainsKey(interval)) {
             ias = IntervalActions[interval];
@@ -95,7 +85,7 @@ public class Timer : MonoBehaviour {
             IntervalAction newAction = new IntervalAction(callback);
             newAction.lastRunTime = timer;
 
-            ias.intervalActions.Add(newAction);
+            ias.Add(newAction);
         } else {
             NewInterval(interval, callback);
         }
@@ -110,11 +100,11 @@ public class Timer : MonoBehaviour {
 
     /// <see cref="Every(float, Action)"/>
     public void Every (float interval, IntervalAction callback) {
-        IntervalActionSet ias;
+        List<IntervalAction> ias = new List<IntervalAction>();
 
         if (IntervalActions.ContainsKey(interval)) {
             ias = IntervalActions[interval];
-            ias.intervalActions.Add(callback);
+            ias.Add(callback);
         } else {
             NewInterval(interval, callback);
         }
@@ -143,17 +133,30 @@ public class Timer : MonoBehaviour {
     }
 
     /// <summary>
-    /// Remove a callback for a given interval if that callback is set
+    /// Remove an IntervalAction for a given interval if that callback is set
     /// </summary>
     /// <param name="interval">Interval the callback is set to</param>
-    /// <param name="callback">Ref to the callback to remove</param>
+    /// <param name="callback">Ref to the IntervalAction to remove</param>
     public void Remove (float interval, IntervalAction callback) {
         if (IntervalActions.ContainsKey(interval)) {
-            IntervalActionSet ias = IntervalActions[interval];
-            ias.intervalActions.Remove(callback);
+            List<IntervalAction> ias = IntervalActions[interval];
+            ias.Remove(callback);
         }
     }
-    
+
+    /// <summary>
+    /// Remove a callback for a given interval from the original action
+    /// </summary>
+    /// <param name="interval">Interval the callback is set to</param>
+    /// <param name="callback">Ref to the Action to remove</param>
+    public void Remove (float interval, Action callback) {
+        if (IntervalActions.ContainsKey(interval)) {
+            List<IntervalAction> ias = IntervalActions[interval];
+            IntervalAction toRemove = ias.Find( ia => ia.action == callback);
+            ias.Remove(toRemove);
+        }
+    }
+ 
     // Update is called once per frame
     void Update () {
         timer += Time.deltaTime;
@@ -161,11 +164,11 @@ public class Timer : MonoBehaviour {
 
         // NOTE(jordan): pretty bad complexity here, ~O(n^2)
         for (i = 0; i < Intervals.Count; i++) { 
-            float interval        = Intervals[i];
-            IntervalActionSet ias = IntervalActions[interval];
+            float interval           = Intervals[i];
+            List<IntervalAction> ias = IntervalActions[interval];
 
-            for (j = 0; j < ias.intervalActions.Count; j++) {
-                IntervalAction cb = ias.intervalActions[j];
+            for (j = 0; j < ias.Count; j++) {
+                IntervalAction cb = ias[j];
 
                 float lastRunTime     = cb.lastRunTime;
                 float diff_t          = timer - lastRunTime;
@@ -180,11 +183,11 @@ public class Timer : MonoBehaviour {
                     if (cb.selfDestruct) {
                         // !DEBUG(jordan)
                         //Debug.Log(string.Format("Remove this callback! {0}", cb));
-                        ias.intervalActions.Remove(cb);
+                        ias.Remove(cb);
                     } else {
                         cb.lastRunTime = timer;
                         // NOTE(jordan): this is dumb, but that's how c# works
-                        ias.intervalActions[j] = cb;
+                        ias[j] = cb;
                     }
                 }
             }
