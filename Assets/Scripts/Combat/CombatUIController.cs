@@ -27,6 +27,12 @@ public class CombatUIController : MonoBehaviour {
     private GameObject UIMessagePanel;
 
     /// <summary>
+    /// End Screen
+    /// </summary>
+    // NOTE(jordan): this object is set in the Unity Inspector
+    public GameObject EndScreen;
+
+    /// <summary>
     /// Ref to CombatController CombatTimer component
     /// </summary>
     private Timer CombatTimer;
@@ -38,6 +44,7 @@ public class CombatUIController : MonoBehaviour {
         UIMessagePanel  = gameObject.transform.GetChild(0).gameObject;
         UITextContainer = UIMessagePanel.transform.GetChild(0).gameObject;
         UIText          = UITextContainer.GetComponent<Text>();
+
     }
 
     /// <summary>

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
+/// Author: Jordan (GitHub: @skorlir)
+/// 2/13/16
 namespace UnitGroups {
     /// <summary>
     /// Units enumerator for easy enumeration of units within a UnitsCollection

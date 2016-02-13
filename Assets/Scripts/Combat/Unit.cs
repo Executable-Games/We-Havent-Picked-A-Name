@@ -5,6 +5,7 @@ using System.Collections;
 /// Unit script for managing combat units
 /// </summary>
 /// Author: Jordan (GitHub: @skorlir)
+/// 2/13/16 - add public Health
 /// 2/11/16
 public class Unit : MonoBehaviour {
 

@@ -11,7 +11,7 @@ using System.Linq;
 /// Controller for the Combat Scene to figure out whose turn it is, etc.
 /// </summary>
 /// Author: Jordan (GitHub: @skorlir)
-/// 2/13/16 - Add allies/enemies
+/// 2/13/16 - Add allies/enemies and reorganize
 /// 2/10/16
 public class CombatController : MonoBehaviour {
 
@@ -46,6 +46,11 @@ public class CombatController : MonoBehaviour {
     /// The combat Stage object
     /// </summary>
     private GameObject Stage;
+
+    /// <summary>
+    /// The End Screen object
+    /// </summary>
+    private GameObject EndDisplay;
 
     /// <summary>
     /// Enumerables of ally and enemy units
@@ -91,6 +96,9 @@ public class CombatController : MonoBehaviour {
         CombatUI     = transform.Find("Combat UI").gameObject;
         CombatTimer  = GetComponent<Timer>();
         UIController = CombatUI.GetComponent<CombatUIController>();
+        EndDisplay   = UIController.EndScreen;
+
+        EndDisplay.SetActive(false);
 
         InitializeUnitGroups();
 
@@ -114,12 +122,12 @@ public class CombatController : MonoBehaviour {
 
     private bool GameOver () {
         if (PlayerUnits.All((au) => au.isDead)) {
-            EndScreen(false);
+            EndScreen(true);
             return true;
         }
 
         if (EnemyUnits.All((eu) => eu.isDead)) {
-            EndScreen(true);
+            EndScreen(false);
             return true;
         }
 
@@ -132,5 +140,6 @@ public class CombatController : MonoBehaviour {
     /// </summary>
     private void EndScreen(bool victory){
         //NOTE(aaron): not implemented yet
+        EndDisplay.SetActive(true);
     }
 }
