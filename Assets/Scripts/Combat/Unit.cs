@@ -29,11 +29,10 @@ public class Unit : MonoBehaviour {
 	}
 
     void Start () {
-        Timer Timer = GetComponentInParent<Timer>();
-
 		Health = GetComponent<CombatHealth> ();
 
 		// !DEBUG(aaron)
+        //Timer Timer = GetComponentInParent<Timer>();
         //Timer.After(0.25f, () => Debug.Log("Hello from Unit!"));
     }
 
