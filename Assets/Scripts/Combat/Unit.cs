@@ -13,9 +13,32 @@ public class Unit : MonoBehaviour {
     /// </summary>
     public bool isEnemy = true;
 
+	/// <summary>
+	/// Reference to combat health
+	/// </summary>
+	public CombatHealth Health;
+
+	/// <summary>
+	/// Determines if the Unit is dead or not
+	/// </summary>
+	/// <returns>True if health is 0; otherwise, return False</returns>
+	public bool isDead {
+		get {
+			return this.Health.hp == 0;
+		}
+	}
+
     void Start () {
         Timer Timer = GetComponentInParent<Timer>();
 
-        Timer.After(0.25f, () => Debug.Log("Hello from Unit!"));
+		Health = GetComponent<CombatHealth> ();
+
+		// !DEBUG(aaron)
+        //Timer.After(0.25f, () => Debug.Log("Hello from Unit!"));
     }
+
+
+
+
+
 }

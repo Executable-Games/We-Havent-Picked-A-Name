@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Controller for the Combat Scene to figure out whose turn it is, etc.
@@ -30,6 +31,12 @@ public class CombatController : MonoBehaviour {
     // NOTE(jordan): every combat item needing a timer should refer to THIS timer.
     private Timer CombatTimer;
 
+	/// <summary>
+	/// Lists of allie and enemy units
+	/// </summary>
+	private List<Unit> allies;
+	private List<Unit> enemies;
+
     /// <summary>
     /// Template strings for constructing a 'turn over!' message
     /// </summary>
@@ -51,10 +58,34 @@ public class CombatController : MonoBehaviour {
         CombatUI    = transform.GetChild(0).gameObject;
         CombatTimer = GetComponent<Timer>();
 
+		//Get children sorted into lists
+		allies = new List<Unit>();
+		enemies = new List<Unit>();
+		foreach (Unit tempUnit in GetComponentsInChildren<Unit>()) {
+			if (tempUnit.isEnemy)
+				enemies.Add (tempUnit);
+			else
+				allies.Add (tempUnit);
+		}
+
         CombatUIController uiController = CombatUI.GetComponent<CombatUIController>();
 
         // NOTE(jordan): this is much nicer than hard-coding a timer every time you need one.
         CombatTimer.Every(turnInterval, delegate {
+			//NOTE(aaron): check if all dead
+			bool allDead = true;
+			foreach (Unit tempUnit in allies)
+				if (!tempUnit.isDead)
+					allDead = false;
+			if (allDead)
+				endScreen(false);
+			allDead = true;
+			foreach (Unit tempUnit in enemies)
+				if (!tempUnit.isDead)
+					allDead = false;
+			if (allDead)
+				endScreen(true);
+
             // NOTE(jordan): switch turn
             playerTurn = !playerTurn;
             // NOTE(jordan): set ui message
@@ -63,4 +94,12 @@ public class CombatController : MonoBehaviour {
             uiController.Show(turnInterval / 2f);
         });
     }
+
+	/// <summary>
+	/// Displays the end screen
+	/// Different display based on victory of defeat (T/F)
+	/// </summary>
+	private void endScreen(bool victory){
+		//NOTE(aaron): not implemented yet
+	}
 }
