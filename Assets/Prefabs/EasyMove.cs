@@ -8,6 +8,7 @@ public class EasyMove : MonoBehaviour {
 	private float movey = 0f;
 	private float movexChange = 1f;
 	public float desiredScale =0f;
+	private int moveYDis = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -17,20 +18,22 @@ public class EasyMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKey (KeyCode.A))
+		if (Input.GetKey (KeyCode.A)) 
 			movex = -1;
 		else if (Input.GetKey (KeyCode.D))
 			movex = 1;
 		else
 			movex = 0;
-		if (Input.GetKey (KeyCode.W)) {
+		if (Input.GetKey (KeyCode.W) && moveYDis < 6) {
 			transform.localScale += new Vector3 (-desiredScale, -desiredScale, 0f);
 			movexChange = 0.9f;
 			movey = 1;
-		} else if (Input.GetKey (KeyCode.S)) {
+			moveYDis += 1;
+		} else if (Input.GetKey (KeyCode.S)&& moveYDis > -20) {
 			transform.localScale += new Vector3 (desiredScale, desiredScale, 0f);
 			movey = -1;
 			movexChange = 1.1f;
+			moveYDis -= 1;
 		}
 		else
 			movey = 0;
