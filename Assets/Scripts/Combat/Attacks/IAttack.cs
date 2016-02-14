@@ -3,7 +3,7 @@
 /// </summary>
 /// Author: Jordan (GitHub: @skorlir)
 /// 2/13/16
-interface IAttack {
+abstract class IAttack {
     /// <summary>
     /// Amount of Damage an Attack will do
     /// </summary>
@@ -28,12 +28,12 @@ interface IAttack {
     /// Set whether an Attack is currently allowed
     /// </summary>
     /// <param name="allowed">Value to set</param>
-    public void SetAllowed (bool allowed);
+    abstract public void SetAllowed (bool allowed);
 
     /// <summary>
     /// Perform the Attack
     /// </summary>
     /// <param name="target">Unit the Attack will be performed on</param>
     /// <returns>The amount of damage done by the attack</returns>
-    public float PerformAttack (Unit target);
+    abstract public float PerformAttack (Unit target);
 }
