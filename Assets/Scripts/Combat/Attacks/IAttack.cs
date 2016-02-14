@@ -7,22 +7,28 @@ abstract class IAttack {
     /// <summary>
     /// Amount of Damage an Attack will do
     /// </summary>
-    public float Damage;
+    public abstract float Damage {
+        get;
+    }
 
     /// <summary>
     /// The Accuracy of an Attack
     /// </summary>
-    public float Accuracy;
+    public abstract float Accuracy {
+        get;
+    }
 
     /// <summary>
     /// What should be displayed on-screen as the name of the Attack
     /// </summary>
-    public string DisplayName;
+    public abstract string DisplayName {
+        get;
+    }
 
     /// <summary>
     /// Whether the Attack is currently allowed in combat
     /// </summary>
-    public bool Allowed;
+    public bool Allowed = true;
 
     /// <summary>
     /// Set whether an Attack is currently allowed
