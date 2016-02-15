@@ -22,15 +22,15 @@ public class CombatHealth : MonoBehaviour {
     /// </summary>
     // FUTURE(jordan): consider a HealthChangeType like 'boost' that can increase HP past MAX, for instance
     private enum HealthChangeType {
-        Heal = 1,
-        Damage = 2
+        Heal,
+        Damage
     }
 
     /// <summary>
     /// Generalized private health diff calculation function
     /// </summary>
     /// <param name="changeType">HealthChangeType representing type of change</param>
-    /// <param name="amount">Integer number of hp in change</param>
+    /// <param name="amount">Integer change</param>
     /// <returns>|change in HP|</returns>
     private int CalculateDeltaHealth (HealthChangeType changeType, int amount) {
         int diff = 0;
