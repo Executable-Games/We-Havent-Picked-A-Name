@@ -17,7 +17,8 @@ public class UnitGroupController : MonoBehaviour {
     /// </summary>
     public UnitsCollection Units = new UnitsCollection();
 
-    void Start () {
+    // NOTE(jordan): Use Awake so that Units is defined before render
+    void Awake () {
         // NOTE(jordan): because Units are direct children, this is faster than
         //               GetComponentsInChildren<T>
         foreach (Transform child in transform) {
