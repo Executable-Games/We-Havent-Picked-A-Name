@@ -32,12 +32,12 @@ public class CombatHealth : MonoBehaviour {
     /// <param name="changeType">HealthChangeType representing type of change</param>
     /// <param name="amount">Integer change</param>
     /// <returns>|change in HP|</returns>
-    private int CalculateDeltaHealth (HealthChangeType changeType, int amount) {
+    private int ChangeHealth (HealthChangeType changeType, int amount) {
         int diff = 0;
 
         switch (changeType) {
             case HealthChangeType.Damage:
-                diff = hp + amount > MAX_HP ? MAX_HP - hp : amount;
+                diff = hp + amount > MAX_HP ? MAX_HP - hp : -amount;
                 break;
             case HealthChangeType.Heal:
                 diff = hp - amount < 0 ? 0 : amount;
@@ -48,6 +48,7 @@ public class CombatHealth : MonoBehaviour {
                 break;
         }
 
+        hp += diff;
         return diff;
     }
 
@@ -55,24 +56,23 @@ public class CombatHealth : MonoBehaviour {
     /// Damage this unit
     /// </summary>
     /// <param name="damageAmount">Integer amount of damage to do</param>
-    public void Damage (int damageAmount) {
-        int healthChange = CalculateDeltaHealth(HealthChangeType.Damage, damageAmount);
-
-        hp -= healthChange;
+    /// <returns>change in HP</returns>
+    public int Damage (int damageAmount) {
+        int healthChange = ChangeHealth(HealthChangeType.Damage, damageAmount);
 
         if (hp == 0) {
             Die();
         }
+
+        return healthChange;
     }
 
     /// <summary>
     /// Heal this unit
     /// </summary>
     /// <param name="healAmount">Integer amount of healing to do</param>
-    public void Heal (int healAmount) {
-        int healthChange = CalculateDeltaHealth(HealthChangeType.Heal, healAmount);
-
-        hp += healthChange;
+    public int Heal (int healAmount) {
+        return ChangeHealth(HealthChangeType.Heal, healAmount);
     }
 
     /// <summary>
