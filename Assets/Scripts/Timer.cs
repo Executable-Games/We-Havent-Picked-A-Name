@@ -170,8 +170,8 @@ public class Timer : MonoBehaviour {
             for (j = 0; j < ias.Count; j++) {
                 IntervalAction cb = ias[j];
 
-                float lastRunTime     = cb.lastRunTime;
-                float diff_t          = timer - lastRunTime;
+                float lastRunTime = cb.lastRunTime;
+                float diff_t      = timer - lastRunTime;
 
                 if (diff_t > interval) {
 
