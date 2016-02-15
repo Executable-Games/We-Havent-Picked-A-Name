@@ -44,7 +44,7 @@ public class CombatHealth : MonoBehaviour {
                 break;
             default:
                 // NOTE(jordan): use UnityEngine's Debug, not System's Console.WriteLine
-                Debug.Log(string.Format("<color=red>Error:</color> Unrecognized HealthChangeType: {0}", changeType));
+                Debug.LogError(string.Format("Unrecognized HealthChangeType: {0}", changeType));
                 break;
         }
 
