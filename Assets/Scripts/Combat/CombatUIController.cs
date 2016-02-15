@@ -9,6 +9,7 @@ using System.Collections.Generic;
 /// Controller for Combat UI that can be used to show a message
 /// </summary>
 /// Author: Jordan (GitHub: @skorlir)
+/// 2/14/16 - Add EndScreen
 /// 2/10/16
 public class CombatUIController : MonoBehaviour {
     /// <summary>
