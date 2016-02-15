@@ -10,12 +10,12 @@ public class CombatHealth : MonoBehaviour {
     /// <summary>
     /// Public maximum HP
     /// </summary>
-    public const int MAX_HP = 1;
+    public const float MAX_HP = 1f;
 
     /// <summary>
     /// Public current HP
     /// </summary>
-    public int hp = MAX_HP;
+    public float hp = MAX_HP;
 
     /// <summary>
     /// Private struct for representing health change type
@@ -32,8 +32,8 @@ public class CombatHealth : MonoBehaviour {
     /// <param name="changeType">HealthChangeType representing type of change</param>
     /// <param name="amount">Integer change</param>
     /// <returns>|change in HP|</returns>
-    private int ChangeHealth (HealthChangeType changeType, int amount) {
-        int diff = 0;
+    private float ChangeHealth (HealthChangeType changeType, float amount) {
+        float diff = 0;
 
         switch (changeType) {
             case HealthChangeType.Damage:
@@ -57,8 +57,8 @@ public class CombatHealth : MonoBehaviour {
     /// </summary>
     /// <param name="damageAmount">Integer amount of damage to do</param>
     /// <returns>change in HP</returns>
-    public int Damage (int damageAmount) {
-        int healthChange = ChangeHealth(HealthChangeType.Damage, damageAmount);
+    public float Damage (float damageAmount) {
+        float healthChange = ChangeHealth(HealthChangeType.Damage, damageAmount);
 
         if (hp == 0) {
             Die();
@@ -71,7 +71,7 @@ public class CombatHealth : MonoBehaviour {
     /// Heal this unit
     /// </summary>
     /// <param name="healAmount">Integer amount of healing to do</param>
-    public int Heal (int healAmount) {
+    public float Heal (float healAmount) {
         return ChangeHealth(HealthChangeType.Heal, healAmount);
     }
 
