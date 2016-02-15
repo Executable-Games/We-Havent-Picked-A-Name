@@ -79,17 +79,6 @@ public class CombatController : MonoBehaviour {
         return string.Format(turnOverTemplate, playerTurn ? playerTurnText : enemyTurnText);
     }
 
-    private void InitializeUnitGroups () {
-        GameObject playerUnitsObj = Stage.transform.Find("Player Units").gameObject;
-        GameObject enemyUnitsObj  = Stage.transform.Find("Enemy Units").gameObject;
-
-        PlayerUnitGroupController = playerUnitsObj.GetComponent<UnitGroupController>();
-        EnemyUnitGroupController  = enemyUnitsObj.GetComponent<UnitGroupController>();
-
-        PlayerUnits = PlayerUnitGroupController.Units;
-        EnemyUnits  = EnemyUnitGroupController.Units;
-    }
-
     // Use this for initialization
     void Start () {
         Stage        = transform.Find("Stage").gameObject;
@@ -105,6 +94,23 @@ public class CombatController : MonoBehaviour {
         CombatTimer.Every(turnInterval, OnTurn);
     }
 
+    /// <summary>
+    /// Helper for initializing unit groups
+    /// </summary>
+    private void InitializeUnitGroups () {
+        GameObject playerUnitsObj = Stage.transform.Find("Player Units").gameObject;
+        GameObject enemyUnitsObj  = Stage.transform.Find("Enemy Units").gameObject;
+
+        PlayerUnitGroupController = playerUnitsObj.GetComponent<UnitGroupController>();
+        EnemyUnitGroupController  = enemyUnitsObj.GetComponent<UnitGroupController>();
+
+        PlayerUnits = PlayerUnitGroupController.Units;
+        EnemyUnits  = EnemyUnitGroupController.Units;
+    }
+
+    /// <summary>
+    /// Action to run on each turn
+    /// </summary>
     private void OnTurn () {
         // NOTE(jordan): Stop timer on Game Over
         if (GameOver()) {
@@ -120,6 +126,10 @@ public class CombatController : MonoBehaviour {
         UIController.Show(turnInterval / 2f);
     }
 
+    /// <summary>
+    /// Checks if game is over and performs appropriate actions if so
+    /// </summary>
+    /// <returns></returns>
     private bool GameOver () {
         if (PlayerUnits.All((au) => au.isDead)) {
             EndScreen(true);
