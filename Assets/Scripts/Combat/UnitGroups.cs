@@ -39,7 +39,7 @@ namespace UnitGroups {
         }
 
         /// <summary>
-        /// Implementation of IEnumerator.Current (as required, apparently)
+        /// Implementation of IEnumerator.Current (as required for generic looping)
         /// </summary>
         /// <see cref="Current"/>
         object IEnumerator.Current {
@@ -49,27 +49,20 @@ namespace UnitGroups {
         }
 
         /// <summary>
-        /// MoveToNextIndex will increment the enumerable index and wrap back to front when the list is exhausted
+        /// Increments enumerable index
         /// </summary>
-        private void MoveToNextIndex () {
+        /// <returns>Whether incrementing was successful</returns>
+        public bool MoveNext () {
             _index++;
             if (_index >= _units.Count)
-                _index = 0;
-        }
-
-        /// <summary>
-        /// Increments enumerable index and 
-        /// </summary>
-        /// <returns></returns>
-        public bool MoveNext () {
-            MoveToNextIndex();
+                return false;
             return true;
         }
 
         /// <summary>
         /// Cycles through
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The next Unit in the cycle</returns>
         public Unit CycleNext () {
             if (MoveNext()) {
                 return Current;
@@ -84,17 +77,18 @@ namespace UnitGroups {
         /// Cycle through, starting from the Unit given
         /// </summary>
         /// <param name="fromUnit">Unit to start cycling from</param>
-        /// <returns></returns>
+        /// <returns>Unit that comes after fromUnit in the cycle</returns>
         public Unit CycleNext (Unit fromUnit) {
             if (_units.Contains(fromUnit)) {
-                _index = _units.IndexOf(fromUnit) - 1;
+                _index = _units.IndexOf(fromUnit);
             }
             return CycleNext();
         }
 
         /// <summary>
-        /// Create a new enumerable group of Units
+        /// Create a new UnitsEnumerator
         /// </summary>
+        /// <param name="units">List of Units to enumerate</param>
         public UnitsEnumerator (List<Unit> units) {
             _units = units;
         }
@@ -113,7 +107,8 @@ namespace UnitGroups {
         /// Get a UnitsEnumerator
         /// </summary>
         /// <returns>UnitsEnumerator for this collection</returns>
-        public UnitsEnumerator Enumerator () {
+        // NOTE(jordan): this is needed because the below are both for foreach and generic/nontyped
+        public UnitsEnumerator GetEnumerator () {
             return new UnitsEnumerator(_units);
         }
 
@@ -121,13 +116,13 @@ namespace UnitGroups {
         /// GetEnumerator implementation for IEnumerable<T>
         /// </summary>
         /// <returns>UnitsEnumerator</returns>
-        public IEnumerator<Unit> GetEnumerator () {
-            return new UnitsEnumerator(_units);
+        IEnumerator<Unit> IEnumerable<Unit>.GetEnumerator () {
+            return GetEnumerator();
         }
 
         /// <see cref="GetEnumerator"/>
         IEnumerator IEnumerable.GetEnumerator () {
-            return new UnitsEnumerator(_units);
+            return GetEnumerator();
         }
 
         /// <summary>
