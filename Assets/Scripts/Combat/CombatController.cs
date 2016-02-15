@@ -11,6 +11,7 @@ using System.Linq;
 /// Controller for the Combat Scene to figure out whose turn it is, etc.
 /// </summary>
 /// Author: Jordan (GitHub: @skorlir)
+/// 2/14/16 - Implement EndScreen()
 /// 2/13/16 - Add allies/enemies and reorganize
 /// 2/10/16
 public class CombatController : MonoBehaviour {
