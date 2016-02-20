@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace Events {
+namespace EventSystem {
     public abstract class EventBehaviour : MonoBehaviour {
         List<IEventListener> listeners;
 
@@ -10,8 +10,8 @@ namespace Events {
         }
 
         void Awake () {
-            listeners = transform.root.GetComponent<EventSystem>().Listeners;
-            Debug.Log("Register Event");
+            listeners = EventManager.Listeners;
+            Debug.Log(string.Format("Register Event (Should only happen ONCE): {0}", this));
             listeners.Add(this.Listener);
             Debug.Log(string.Format("Event Listeners: {0}", listeners));
         }

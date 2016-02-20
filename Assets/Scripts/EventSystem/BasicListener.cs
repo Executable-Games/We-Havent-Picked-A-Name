@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Events {
-    public class BasicListener<T> : IEventListener {
+namespace EventSystem {
+    public class BasicListener<T> : IEventListener where T: IEvent {
         private List<Action> _callbacks;
         private Type _eventType;
 

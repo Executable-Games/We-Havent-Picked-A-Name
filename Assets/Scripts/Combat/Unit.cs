@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Events;
-using UnitEvents;
+using EventSystem;
+using Combat.Events;
 
 /// <summary>
 /// Unit script for managing combat units
@@ -25,8 +25,6 @@ public class Unit : MonoBehaviour {
     /// </summary>
     public CombatHealth Health;
 
-    public EventSystem Events;
-
     /// <summary>
     /// Determines if the Unit is dead or not
     /// </summary>
@@ -41,11 +39,9 @@ public class Unit : MonoBehaviour {
         Controller = transform.root.gameObject.GetComponent<CombatController>();
         Health = GetComponent<CombatHealth>();
 
-        Events = transform.root.gameObject.GetComponent<EventSystem>();
+        EventManager.On<UnitDie>(() => Debug.Log(string.Format("Unit {0} has died!", this)));
 
-        Events.On<UnitDie>(() => Debug.Log(string.Format("Unit {0} has died!", this)));
-
-        Events.Trigger<UnitDie>();
+        EventManager.Trigger<UnitDie>();
 
         // !DEBUG(aaron)
         //Controller.CombatTimer.After(0.25f, () => Debug.Log("Hello from Unit!"));

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Events {
+namespace EventSystem {
     public interface IEventListener {
         List<Action> Callbacks { get; }
         Type EventType { get; }

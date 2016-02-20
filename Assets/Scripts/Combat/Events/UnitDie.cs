@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using Events;
+using EventSystem;
 
-namespace UnitEvents {
+namespace Combat.Events {
     public class UnitDie : EventBehaviour, IEvent {
         public static BasicListener<UnitDie> listener = new BasicListener<UnitDie>();
 
