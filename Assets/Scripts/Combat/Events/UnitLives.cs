@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using EventSystem;
 
 namespace Combat.Events {
-    public class UnitDie : EventBehaviour, IEvent {
-        public static BasicListener<UnitDie> listener = new BasicListener<UnitDie>();
+    public class UnitLives : EventBehaviour, IEvent {
+        public static BasicListener<UnitLives> listener = new BasicListener<UnitLives>();
 
         override public IEventListener Listener {
             get {

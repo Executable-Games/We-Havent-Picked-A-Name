@@ -39,9 +39,9 @@ public class Unit : MonoBehaviour {
         Controller = transform.root.gameObject.GetComponent<CombatController>();
         Health = GetComponent<CombatHealth>();
 
-        EventManager.On<UnitDie>(() => Debug.Log(string.Format("Unit {0} has died!", this)));
+        EventManager.On<UnitLives>(() => Debug.Log(string.Format("Unit {0} is alive!", this)));
 
-        EventManager.Trigger<UnitDie>();
+        EventManager.Trigger<UnitLives>();
 
         // !DEBUG(aaron)
         //Controller.CombatTimer.After(0.25f, () => Debug.Log("Hello from Unit!"));
