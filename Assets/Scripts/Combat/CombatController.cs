@@ -82,6 +82,11 @@ public class CombatController : MonoBehaviour {
         return string.Format(turnOverTemplate, playerTurn ? playerTurnText : enemyTurnText);
     }
 
+    // Run before Units Start
+    void Awake () {
+        EventManager.On<UnitLives, Unit>((unit) => Debug.Log(string.Format("Unit {0} is alive!", unit)));
+    }
+
     // Use this for initialization
     void Start () {
         Stage        = transform.Find("Stage").gameObject;

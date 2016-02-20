@@ -6,6 +6,6 @@ namespace EventSystem {
     }
 
     public interface IEvent<ActionType> : IEvent {
-        new IEventListener<ActionType> Listener { get; }
+        IEventListener<ActionType> Listener { get; }
     }
 }

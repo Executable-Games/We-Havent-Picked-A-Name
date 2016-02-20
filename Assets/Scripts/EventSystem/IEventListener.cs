@@ -9,6 +9,7 @@ namespace EventSystem {
     }
 
     public interface IEventListener<ActionType> : IEventListener {
-        new List<ActionType> Callbacks { get; }
+        new List<Action<ActionType>> Callbacks { get; }
+        void Invoke (ActionType at);
     }
 }

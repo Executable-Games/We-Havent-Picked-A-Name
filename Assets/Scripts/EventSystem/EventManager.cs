@@ -16,14 +16,29 @@ namespace EventSystem {
             l.Callbacks.Add(callback);
         }
 
+        public static void On<T, U> (Action<U> callback) where T : IEvent {
+            IEventListener<U> l = (GetListenerFor<T>() as IEventListener<U>);
+            l.Callbacks.Add(callback);
+        }
+
         public static bool Off<T> (Action callback) where T: IEvent {
             IEventListener l = GetListenerFor<T>();
             return l.Callbacks.Remove(callback);
         }
 
+        public static bool Off<T, U> (Action<U> callback) where T : IEvent {
+            IEventListener<U> l = (GetListenerFor<T>() as IEventListener<U>);
+            return l.Callbacks.Remove(callback);
+       }
+
         public static void Trigger<T> () where T: IEvent {
             IEventListener l = GetListenerFor<T>();
             l.Invoke();
+        }
+
+        public static void Trigger<T, U> (U arg) where T : IEvent {
+            IEventListener<U> l = (GetListenerFor<T>() as IEventListener<U>);
+            l.Invoke(arg);
         }
     }
 }
