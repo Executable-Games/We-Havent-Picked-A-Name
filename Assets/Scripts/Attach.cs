@@ -14,7 +14,7 @@ public class Attach : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        OnAttach ();
+        OnAttach();
 	}
 
     /// <summary>
@@ -29,7 +29,7 @@ public class Attach : MonoBehaviour {
     /// </summary>
     void Start () 
 	{
-        OnAttach ();
+        OnAttach();
 	}
 
     /// <summary>
@@ -50,22 +50,22 @@ public class Attach : MonoBehaviour {
         //with centered pivots.
         switch (attachPoint) {
         case AttachPoint.TopLeft:
-            transform.position = new Vector3 (targetX - width / 2, targetY - height / 2, 0);
+            transform.position = new Vector3(targetX - width / 2, targetY - height / 2, 0);
             break;
         case AttachPoint.TopRight:
-            transform.position = new Vector3 (targetX + width / 2, targetY - height / 2, 0);
+            transform.position = new Vector3(targetX + width / 2, targetY - height / 2, 0);
             break;
         case AttachPoint.BottomLeft:
-            transform.position = new Vector3 (targetX - width / 2, targetY + height / 2, 0);
+            transform.position = new Vector3(targetX - width / 2, targetY + height / 2, 0);
             break;
         case AttachPoint.BottomRight:
-            transform.position = new Vector3 (targetX + width / 2, targetY + height / 2, 0);
+            transform.position = new Vector3(targetX + width / 2, targetY + height / 2, 0);
             break;
         case AttachPoint.TopCenter:
-            transform.position = new Vector3 (targetX, targetY - height / 2, 0);
+            transform.position = new Vector3(targetX, targetY - height / 2, 0);
             break;
         case AttachPoint.BottomCenter:
-            transform.position = new Vector3 (targetX, targetY + height / 2, 0); 
+            transform.position = new Vector3(targetX, targetY + height / 2, 0); 
             break;
         }
 	}

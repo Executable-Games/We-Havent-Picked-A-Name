@@ -13,6 +13,11 @@ using System.Collections.Generic;
 /// 2/10/16
 public class CombatUIController : MonoBehaviour {
     /// <summary>
+    /// Ref to CombatController
+    /// </summary>
+    private CombatController Controller;
+
+    /// <summary>
     /// UIText object to show/hide/change
     /// </summary>
     private Text UIText;
@@ -39,8 +44,8 @@ public class CombatUIController : MonoBehaviour {
     private Timer CombatTimer;
 
     void Start () {
-        // NOTE(jordan): since CombatUI is a child of CombatController this works
-        CombatTimer = GetComponentInParent<Timer>();
+        Controller = transform.root.gameObject.GetComponent<CombatController>();
+        CombatTimer = Controller.CombatTimer;
         // NOTE(jordan): this only works because CombatUI only has 1 child, and it's the MessagePanel
         UIMessagePanel  = gameObject.transform.GetChild(0).gameObject;
         UITextContainer = UIMessagePanel.transform.GetChild(0).gameObject;

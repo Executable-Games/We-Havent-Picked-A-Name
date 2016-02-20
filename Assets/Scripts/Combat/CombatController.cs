@@ -41,7 +41,7 @@ public class CombatController : MonoBehaviour {
     /// Ref to fancy shmancy CombatTimer
     /// </summary>
     // NOTE(jordan): every combat item needing a timer should refer to THIS timer.
-    private Timer CombatTimer;
+    public Timer CombatTimer;
 
     /// <summary>
     /// The combat Stage object
