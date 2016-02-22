@@ -20,9 +20,9 @@ namespace GameEvents {
         void Awake () {
             Type t = GetType();
             InstantiateListener(t);
-            EventSystem.Events.Add(t, this);
             //// !DEBUG(jordan)
-            //UnityEngineDebug.Log(string.Format("Registering Event. {0} {1} {2}", this, Listener, EventManager.Events));
+            //UnityEngine.Debug.Log(string.Format("Registering Event. {0} {1} {2}", this, Listener, EventSystem.Events));
+            EventSystem.Events.Add(t, this);
         }
     }
 
