@@ -70,23 +70,23 @@ public class Attach : MonoBehaviour {
         //the local relative position of this position within the object. Therefore, this currently only works for objects
         //with centered pivots.
         switch (attachPoint) {
-            case AttachPoint.TopLeft:
-                transform.position = new Vector3(targetX - width / 2, targetY - height / 2, 0);
-                break;
-            case AttachPoint.TopRight:
-                transform.position = new Vector3(targetX + width / 2, targetY - height / 2, 0);
-                break;
             case AttachPoint.BottomLeft:
-                transform.position = new Vector3(targetX - width / 2, targetY + height / 2, 0);
+                transform.position = new Vector3(attachTargetX - width / 2, attachTargetY - height / 2, 0);
                 break;
             case AttachPoint.BottomRight:
-                transform.position = new Vector3(targetX + width / 2, targetY + height / 2, 0);
+                transform.position = new Vector3(attachTargetX + width / 2, attachTargetY - height / 2, 0);
                 break;
-            case AttachPoint.TopCenter:
-                transform.position = new Vector3(targetX, targetY - height / 2, 0);
+            case AttachPoint.TopLeft:
+                transform.position = new Vector3(attachTargetX - width / 2, attachTargetY + height / 2, 0);
+                break;
+            case AttachPoint.TopRight:
+                transform.position = new Vector3(attachTargetX + width / 2, attachTargetY + height / 2, 0);
                 break;
             case AttachPoint.BottomCenter:
-                transform.position = new Vector3(targetX, targetY + height / 2, 0); 
+                transform.position = new Vector3(attachTargetX, attachTargetY - height / 2, 0);
+                break;
+            case AttachPoint.TopCenter:
+                transform.position = new Vector3(attachTargetX, attachTargetY + height / 2, 0); 
                 break;
         }
     }
