@@ -58,4 +58,18 @@ namespace EventSystem {
             listener = new EventListener<P1, P2>(t);
         }
     }
+
+    public class GameEvent<P1, P2, P3> : GameEventBase {
+        public static EventListener<P1, P2, P3> listener;
+
+        override public EventListenerBase Listener {
+            get {
+                return listener;
+            }
+        }
+
+        override protected void InstantiateListener (Type t) {
+            listener = new EventListener<P1, P2, P3>(t);
+        }
+    }
 }

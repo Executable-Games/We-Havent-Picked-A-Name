@@ -11,48 +11,51 @@ namespace EventSystem {
         }
 
         public static void On<E> (Action callback) where E : GameEvent {
-            EventListenerBase l = GetListenerFor<E>();
-            (l as EventListener).Callbacks.Add(callback);
+            (GetListenerFor<E>() as EventListener).Callbacks.Add(callback);
         }
 
         public static void On<E, P> (Action<P> callback) where E : GameEvent<P> {
-            EventListenerBase l = GetListenerFor<E>();
-            (l as EventListener<P>).Callbacks.Add(callback);
+            (GetListenerFor<E>() as EventListener<P>).Callbacks.Add(callback);
         }
 
         public static void On<E, P1, P2> (Action<P1, P2> callback) where E : GameEvent<P1, P2> {
-            EventListenerBase l = GetListenerFor<E>();
-            (l as EventListener<P1, P2>).Callbacks.Add(callback);
+            (GetListenerFor<E>() as EventListener<P1, P2>).Callbacks.Add(callback);
+        }
+
+        public static void On<E, P1, P2, P3> (Action<P1, P2, P3> callback) where E : GameEvent<P1, P2, P3> {
+            (GetListenerFor<E>() as EventListener<P1, P2, P3>).Callbacks.Add(callback);
         }
 
         public static bool Off<E> (Action callback) where E : GameEvent {
-            EventListenerBase l = GetListenerFor<E>();
-            return (l as EventListener).Callbacks.Remove(callback);
+            return (GetListenerFor<E>() as EventListener).Callbacks.Remove(callback);
         }
 
         public static bool Off<E, P> (Action<P> callback) where E : GameEvent<P> {
-            EventListenerBase l = GetListenerFor<E>();
-            return (l as EventListener<P>).Callbacks.Remove(callback);
+            return (GetListenerFor<E>() as EventListener<P>).Callbacks.Remove(callback);
        }
 
         public static bool Off<E, P1, P2> (Action<P1, P2> callback) where E : GameEvent<P1, P2> {
-            EventListenerBase l = GetListenerFor<E>();
-            return (l as EventListener<P1, P2>).Callbacks.Remove(callback);
+            return (GetListenerFor<E>() as EventListener<P1, P2>).Callbacks.Remove(callback);
        }
 
+        public static void Off<E, P1, P2, P3> (Action<P1, P2, P3> callback) where E : GameEvent<P1, P2, P3> {
+            (GetListenerFor<E>() as EventListener<P1, P2, P3>).Callbacks.Remove(callback);
+        }
+
         public static void Trigger<E> () where E : GameEvent {
-            EventListenerBase l = GetListenerFor<E>();
-            (l as EventListener).Invoke();
+            (GetListenerFor<E>() as EventListener).Invoke();
         }
 
         public static void Trigger<E, P> (P arg) where E : GameEvent<P> {
-            EventListenerBase l = GetListenerFor<E>();
-            (l as EventListener<P>).Invoke<P>(arg);
+            (GetListenerFor<E>() as EventListener<P>).Invoke(arg);
         }
 
         public static void Trigger<E, P1, P2> (P1 arg1, P2 arg2) where E : GameEvent<P1, P2> {
-            EventListenerBase l = GetListenerFor<E>();
-            (l as EventListener<P1, P2>).Invoke<P1, P2>(arg1, arg2);
+            (GetListenerFor<E>() as EventListener<P1, P2>).Invoke(arg1, arg2);
+        }
+
+        public static void Trigger<E, P1, P2, P3> (P1 arg1, P2 arg2, P3 arg3) where E : GameEvent<P1, P2, P3> {
+            (GetListenerFor<E>() as EventListener<P1, P2, P3>).Invoke(arg1, arg2, arg3);
         }
     }
 }

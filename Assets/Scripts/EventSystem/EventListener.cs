@@ -39,7 +39,7 @@ namespace EventSystem {
             }
         }
 
-        public void Invoke<I> (I arg) where I : P1 {
+        public void Invoke (P1 arg) {
             Callbacks.ForEach((cb) => cb(arg));
         }
 
@@ -57,8 +57,26 @@ namespace EventSystem {
             }
         }
 
-        public void Invoke<I1, I2> (I1 arg1, I2 arg2) where I1 : P1 where I2 : P2 {
+        public void Invoke (P1 arg1, P2 arg2) {
             Callbacks.ForEach((cb) => cb(arg1, arg2));
+        }
+
+        public EventListener (Type evType) {
+            _eventType = evType;
+        }
+    }
+
+    public class EventListener<P1, P2, P3> : EventListenerBase {
+        private List<Action<P1, P2, P3>> _callbacks = new List<Action<P1, P2, P3>>();
+
+        public List<Action<P1, P2, P3>> Callbacks {
+            get {
+                return _callbacks;
+            }
+        }
+
+        public void Invoke (P1 arg1, P2 arg2, P3 arg3) {
+            Callbacks.ForEach((cb) => cb(arg1, arg2, arg3));
         }
 
         public EventListener (Type evType) {
