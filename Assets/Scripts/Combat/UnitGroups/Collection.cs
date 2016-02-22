@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Combat.Units;
 
 /// Author: Jordan (GitHub: @skorlir)
 /// 2/13/16
