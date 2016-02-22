@@ -10,11 +10,6 @@ namespace Combat.Attacks {
     /// 2/14/16
     public class BasicAttack : MonoBehaviour, IAttack {
         /// <summary>
-        /// Private member infrastructure for properties
-        /// </summary>
-        private bool allowed;
-
-        /// <summary>
         /// Does 1hp damage
         /// </summary>
         public float Damage {
@@ -44,12 +39,8 @@ namespace Combat.Attacks {
         /// Property getter and setter for Allowed
         /// </summary>
         public bool Allowed {
-            get {
-                return allowed;
-            }
-            set {
-                allowed = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -57,8 +48,7 @@ namespace Combat.Attacks {
         /// </summary>
         /// <param name="target">Unit to perform attack on</param>
         public float PerformAttack (Unit target) {
-            // TODO(jordan): implement this
-            return 0;
+            return target.Health.Damage(Damage);
         }
     }
 }

@@ -57,15 +57,19 @@ namespace Combat {
         private void Target () {
             switch (Currently) {
                 case ReticleState.Targeting:
+                    // TODO(jordan): not sure this is perfect, but it'll work for now
+                    float dmg = playerUnit.CurrentlySelectedAttack.PerformAttack(selectedUnit);
+                    Debug.Log(string.Format("<color=#00ff00>Attacked enemy</color> {0} for {1} damage, to {2} hp", selectedUnit, dmg, selectedUnit.Health.hp));
+                    allowedTargets = moveablePlayerUnits;
+                    GetComponent<SpriteRenderer>().flipX = false;
+                    attachPoint = AttachPoint.TopRight;
+                    Currently = ReticleState.Selecting;
+
                     moveablePlayerUnits.Remove(playerUnit);
+
                     if (moveablePlayerUnits.Count() == 0) {
                         // TODO(jordan): do what you do when you're done selecting moves
                         EventSystem.Trigger<TurnOver>();
-                    } else {
-                        allowedTargets = moveablePlayerUnits;
-                        GetComponent<SpriteRenderer>().flipX = false;
-                        attachPoint = AttachPoint.TopRight;
-                        Currently = ReticleState.Selecting;
                     }
                     break;
                 case ReticleState.Selecting:
@@ -93,18 +97,24 @@ namespace Combat {
             Debug.Log(string.Format("playerUnit {0}", playerUnit));
         }
 
-        // NOTE(jordan): in order to make sure nothing is null at start, we need this
+        // NOTE(jordan): initialize all references
         void Awake () {
             allowedTargets = targetGroup.GetComponent<UnitGroupController>().Units;
             targetsEnumerator = allowedTargets.GetEnumerator();
             Debug.Log(string.Format("allowedTargets: {0}", allowedTargets));
         }
 
+        // NOTE(jordan): set attach points
+        void OnEnable () {
+            attachPoint = AttachPoint.TopRight;
+            GetComponent<SpriteRenderer>().flipX = false;
+            AttachToTarget();
+        }
+
         void Start () {
+            selectedUnit = allowedTargets.ElementAt(0);
             moveablePlayerUnits = new UnitsCollection(Controller.PlayerUnits);
             Debug.Log(string.Format("moveablePlayerUnits: {0}", moveablePlayerUnits));
-
-            AttachToTarget();
             // NOTE(jordan): events will be called on user input
             // NOTE(jordan): press space / confirm
             EventSystem.On<CommitSelection>(() => {

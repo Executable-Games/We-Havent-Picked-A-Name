@@ -2,6 +2,7 @@
 using System;
 
 namespace Combat {
+    using UnitGroups;
     /// <summary>
     /// Script for handling health of units in combat
     /// </summary>
@@ -38,10 +39,10 @@ namespace Combat {
 
             switch (changeType) {
                 case HealthChangeType.Damage:
-                    diff = hp + amount > MAX_HP ? MAX_HP - hp : -amount;
+                    diff = hp - amount < 0 ? 0 : -amount;
                     break;
                 case HealthChangeType.Heal:
-                    diff = hp - amount < 0 ? 0 : amount;
+                    diff = hp + amount > MAX_HP ? MAX_HP - hp : amount;
                     break;
                 default:
                     // NOTE(jordan): use UnityEngine's Debug, not System's Console.WriteLine
@@ -49,6 +50,7 @@ namespace Combat {
                     break;
             }
 
+            Debug.Log(string.Format("HP Change: {0}", diff));
             hp += diff;
             return diff;
         }
@@ -80,7 +82,8 @@ namespace Combat {
         /// Perform cleanup and any other pre-death actions, then destroy this gameObject
         /// </summary>
         private void Die () {
-            // NOTE(jordan): this will later be more sophisticated; eg, add in an animation, maybe
+            // NOTE(jordan): remove self from unit group
+            GetComponentInParent<UnitGroupController>().Units.Remove(GetComponentInParent<Unit>());
             Destroy(gameObject);
         }
     }

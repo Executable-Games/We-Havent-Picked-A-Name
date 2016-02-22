@@ -74,8 +74,8 @@ namespace Combat {
             EventSystem.On<TurnOver>(() => {
                 // NOTE(jordan): set ui message
                 SetMessage(TurnOverMessage());
-                // NOTE(jordan): show message for 1/2 turnInterval seconds (needs to be less than turnInterval or it will show and hide at the same time ;) )
-                Show(Controller.turnInterval / 2f);
+                // NOTE(jordan): show message for 1 seconds (needs to be fewer than turnInterval)
+                Show(3f);
                 // NOTE(jordan): set player targeting reticle if playerTurn
                 if (Controller.playerTurn) {
                     Reticle.SetActive(true);

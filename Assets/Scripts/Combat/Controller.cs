@@ -22,8 +22,8 @@ namespace Combat {
         /// <summary>
         /// Number of seconds in a turn
         /// </summary>
-        // NOTE(jordan): 5 seconds for turns will probably be something we want to adjust
-        public static readonly int turnInterval = 15;
+        // NOTE(jordan): seconds for turns will probably be something we want to adjust
+        public static readonly int turnInterval = 5;
 
         /// <summary>
         /// Public flag for whether it is the player's turn
@@ -93,24 +93,29 @@ namespace Combat {
             EndDisplay.SetActive(false);
 
             InitializeUnitGroups();
+        }
 
-            CombatTimer.Every(turnInterval, OnTurn);
+        void Start () {
+            CombatTimer.Every(turnInterval, EventSystem.Trigger<TurnOver>);
+            EventSystem.On<TurnOver>(OnTurnOver);
         }
 
         /// <summary>
         /// Action to run on each turn
         /// </summary>
-        private void OnTurn () {
-            // NOTE(jordan): Stop timer on Game Over
+        private void OnTurnOver () {
+            // NOTE(jordan): Stop timer
+            CombatTimer.Remove(turnInterval, EventSystem.Trigger<TurnOver>);
+
             if (GameOver()) {
-                CombatTimer.Remove(turnInterval, OnTurn);
                 return;
             }
 
             // NOTE(jordan): switch turn
             playerTurn = !playerTurn;
 
-            EventSystem.Trigger<TurnOver>();
+            // NOTE(jordan): reset delay
+            CombatTimer.Every(turnInterval, EventSystem.Trigger<TurnOver>);
         }
 
         /// <summary>

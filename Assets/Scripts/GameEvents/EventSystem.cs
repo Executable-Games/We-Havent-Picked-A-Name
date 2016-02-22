@@ -17,8 +17,14 @@ namespace GameEvents {
         /// <typeparam name="E">Event type to look up</typeparam>
         /// <returns>EventListener for Event of type E</returns>
         private static EventListenerBase GetListenerFor<E> () where E : GameEventBase {
-            GameEventBase ge = Events[typeof(E)];
-            return ge.Listener;
+            GameEventBase ge;
+            try {
+                Events.TryGetValue(typeof(E), out ge);
+                return ge.Listener;
+            } catch (KeyNotFoundException) {
+                UnityEngine.Debug.LogError(string.Format("Could not find event {0}, are you sure it is in the scene?", typeof(E)));
+                return null;
+            }
         }
 
         /// <summary>
