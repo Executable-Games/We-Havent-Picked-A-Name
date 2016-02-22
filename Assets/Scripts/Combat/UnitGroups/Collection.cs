@@ -172,13 +172,6 @@ namespace Combat.UnitGroups {
         }
 
         /// <summary>
-        /// Create a new enumerable UnitsCollection
-        /// </summary>
-        public UnitsCollection () {
-            _units = new List<Unit>();
-        }
-
-        /// <summary>
         /// Add a new Unit
         /// </summary>
         /// <param name="u">Unit to add</param>
@@ -192,6 +185,30 @@ namespace Combat.UnitGroups {
         /// <param name="u">Unit to remove</param>
         public bool Remove (Unit u) {
             return _units.Remove(u);
+        }
+
+        /// <summary>
+        /// Check whether collection contains a Unit
+        /// </summary>
+        /// <param name="u">Unit to look for</param>
+        /// <returns>True if u is in collection</returns>
+        public bool Contains (Unit u) {
+            return _units.Contains(u);
+        }
+
+        /// <summary>
+        /// Create a new enumerable UnitsCollection
+        /// </summary>
+        public UnitsCollection () {
+            _units = new List<Unit>();
+        }
+
+        /// <summary>
+        /// Cloning constructor
+        /// </summary>
+        /// <param name="uc">UnitsConstructor to clone</param>
+        public UnitsCollection (UnitsCollection uc) {
+            _units = new List<Unit>(uc._units);
         }
     }
 }
