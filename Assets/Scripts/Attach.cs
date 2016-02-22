@@ -5,36 +5,36 @@ using System.Collections.Generic;
 /// Generic Script for attaching objects to other objects (position-wise)
 /// </summary>
 /// Author: Aaron (Github: @aaronkarp123)
-/// Modified 2/22/16 - check if target has moved before reattaching (Jordan)
+/// Modified 2/22/16 - check if attachTarget has moved before reattaching (Jordan)
 /// 2/15/16
 public class Attach : MonoBehaviour {
 
     public AttachPoint attachPoint;
-    public GameObject target;
+    public GameObject attachTarget;
 
     private Bounds targetBounds;
     private Vector3 targetPosition;
 
     /// <summary>
-    /// Checks if target position has changed
+    /// Checks if attachTarget position has changed
     /// </summary>
-    /// <returns>True if target position has changed</returns>
+    /// <returns>True if attachTarget position has changed</returns>
     private bool TargetPositionChanged () {
-        return !target.transform.position.Equals(targetPosition);
+        return !attachTarget.transform.position.Equals(targetPosition);
     }
 
     /// <summary>
-    /// Checks if target size has changed
+    /// Checks if attachTarget size has changed
     /// </summary>
-    /// <returns>True if target size has changed</returns>
+    /// <returns>True if attachTarget size has changed</returns>
     private bool TargetSizeChanged () {
-        Bounds currentBounds = target.GetComponent<Renderer>().bounds;
+        Bounds currentBounds = attachTarget.GetComponent<Renderer>().bounds;
         return !currentBounds.size.Equals(targetBounds);
     }
     
     // Update is called once per frame
     void Update () {
-        // NOTE(jordan): only reattach if target has moved or scaled.
+        // NOTE(jordan): only reattach if attachTarget has moved or scaled.
         if (TargetPositionChanged() || TargetSizeChanged())
             AttachToTarget();
     }
@@ -49,25 +49,23 @@ public class Attach : MonoBehaviour {
     /// <summary>
     /// Create the attach point
     /// </summary>
-    void Start () 
-    {
+    void Start () {
         AttachToTarget();
     }
 
     /// <summary>
-    /// Attaches this object to 'target' at 'point'
+    /// Attaches this object to 'attachTarget' at 'point'
     /// </summary>
     /// <param name="point">Point to attach to.</param>
-    /// <param name="target">Target object.</param>
-    void AttachToTarget ()
-    {
-        targetBounds = target.GetComponent<Renderer>().bounds;
-        targetPosition = target.transform.position;
+    /// <param name="attachTarget">Target object.</param>
+    protected void AttachToTarget () {
+        targetBounds = attachTarget.GetComponent<Renderer>().bounds;
+        targetPosition = attachTarget.transform.position;
        
         float width = targetBounds.size.x;
         float height = targetBounds.size.y;
-        float targetX = targetPosition.x;
-        float targetY = targetPosition.y;
+        float attachTargetX = targetPosition.x;
+        float attachTargetY = targetPosition.y;
         //NOTE (aaron): Ideally this would be independent of anchor/pivot position, but I cannot find a way to abstract
         //the local relative position of this position within the object. Therefore, this currently only works for objects
         //with centered pivots.
