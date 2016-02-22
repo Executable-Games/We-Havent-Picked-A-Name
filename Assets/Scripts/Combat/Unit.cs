@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 using GameEvents;
-using Combat.Events;
 
 namespace Combat {
+    using Events;
+    using Attacks;
     /// <summary>
     /// Unit script for managing combat units
     /// </summary>

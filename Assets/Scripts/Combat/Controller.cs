@@ -2,14 +2,14 @@
 using System.Collections;
 // NOTE(jordan): List
 using System.Collections.Generic;
-// NOTE(jordan): UnitsCollection
-using UnitGroups;
 // NOTE(jordan): List.All
 using System.Linq;
 using GameEvents;
-using Combat.Events;
 
 namespace Combat {
+    using Events;
+    // NOTE(jordan): UnitsCollection
+    using UnitGroups;
     /// <summary>
     /// Controller for the Combat Scene to figure out whose turn it is, etc.
     /// </summary>

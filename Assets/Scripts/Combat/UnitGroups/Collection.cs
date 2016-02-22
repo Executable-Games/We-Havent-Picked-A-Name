@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Combat;
 
 /// Author: Jordan (GitHub: @skorlir)
+/// Modified 2/22/16: updates to cycle methods for targeting
 /// 2/13/16
-namespace UnitGroups {
+namespace Combat.UnitGroups {
     /// <summary>
     /// Units enumerator for easy enumeration of units within a UnitsCollection
     /// </summary>

@@ -5,9 +5,9 @@ using System.Collections;
 // NOTE(jordan): Generic namespace contains List
 using System.Collections.Generic;
 using GameEvents;
-using Combat.Events;
 
 namespace Combat {
+    using Events;
     /// <summary>
     /// Controller for Combat UI that can be used to show a message
     /// </summary>

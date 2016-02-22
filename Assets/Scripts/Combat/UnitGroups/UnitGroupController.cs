@@ -2,9 +2,8 @@
 using System.Collections;
 // NOTE(jordan): List
 using System.Collections.Generic;
-using Combat;
 
-namespace UnitGroups {
+namespace Combat.UnitGroups {
     /// <summary>
     /// Unit Group Controller for handling groups of units
     /// </summary>
