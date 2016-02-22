@@ -30,7 +30,7 @@ namespace GameEvents {
     /// GameEvent with paremeterless callbacks
     /// </summary>
     public class GameEvent : GameEventBase {
-        public static EventListener listener;
+        public EventListener listener;
 
         override public EventListenerBase Listener {
             get {
@@ -48,7 +48,7 @@ namespace GameEvents {
     /// </summary>
     /// <typeparam name="P">First callback param type</typeparam>
     public class GameEvent<P> : GameEventBase {
-        public static EventListener<P> listener;
+        public EventListener<P> listener;
 
         override public EventListenerBase Listener {
             get {
@@ -67,7 +67,7 @@ namespace GameEvents {
     /// <typeparam name="P1">First callback param type</typeparam>
     /// <typeparam name="P2">Second callback param type</typeparam>
     public class GameEvent<P1, P2> : GameEventBase {
-        public static EventListener<P1, P2> listener;
+        public EventListener<P1, P2> listener;
 
         override public EventListenerBase Listener {
             get {
@@ -87,7 +87,7 @@ namespace GameEvents {
     /// <typeparam name="P2">Second callback param type</typeparam>
     /// <typeparam name="P3">Third callback param type</typeparam>
     public class GameEvent<P1, P2, P3> : GameEventBase {
-        public static EventListener<P1, P2, P3> listener;
+        public EventListener<P1, P2, P3> listener;
 
         override public EventListenerBase Listener {
             get {
