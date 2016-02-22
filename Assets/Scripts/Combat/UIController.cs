@@ -42,6 +42,11 @@ namespace Combat {
         private Timer CombatTimer;
 
         /// <summary>
+        /// Reticle for targeting
+        /// </summary>
+        private GameObject Reticle;
+
+        /// <summary>
         /// Template strings for constructing a 'turn over!' message
         /// </summary>
         private string turnOverTemplate = "<b>Turn over!</b> It is now {0} turn.";
@@ -63,12 +68,20 @@ namespace Combat {
             UITextContainer = UIMessagePanel.transform.GetChild(0).gameObject;
             UIText = UITextContainer.GetComponent<Text>();
 
+            Reticle = transform.Find("Reticle").gameObject;
+
             // NOTE(jordan): perform UI changes when turn control swaps
             EventSystem.On<TurnOver>(() => {
                 // NOTE(jordan): set ui message
                 SetMessage(TurnOverMessage());
                 // NOTE(jordan): show message for 1/2 turnInterval seconds (needs to be less than turnInterval or it will show and hide at the same time ;) )
                 Show(Controller.turnInterval / 2f);
+                // NOTE(jordan): set player targeting reticle if playerTurn
+                if (Controller.playerTurn) {
+                    Reticle.SetActive(true);
+                } else {
+                    Reticle.SetActive(false);
+                }
             });
         }
 
