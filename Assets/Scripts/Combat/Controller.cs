@@ -24,7 +24,7 @@ namespace Combat {
         /// Number of seconds in a turn
         /// </summary>
         // NOTE(jordan): 5 seconds for turns will probably be something we want to adjust
-        public int turnInterval = 5;
+        public readonly int turnInterval = 5;
 
         /// <summary>
         /// Public flag for whether it is the player's turn
@@ -69,6 +69,20 @@ namespace Combat {
         private UnitGroupController EnemyUnitGroupController;
         private UnitGroupController PlayerUnitGroupController;
 
+        /// <summary>
+        /// Helper for initializing unit groups
+        /// </summary>
+        private void InitializeUnitGroups () {
+            GameObject playerUnitsObj = Stage.transform.Find("Player Units").gameObject;
+            GameObject enemyUnitsObj = Stage.transform.Find("Enemy Units").gameObject;
+
+            PlayerUnitGroupController = playerUnitsObj.GetComponent<UnitGroupController>();
+            EnemyUnitGroupController = enemyUnitsObj.GetComponent<UnitGroupController>();
+
+            PlayerUnits = PlayerUnitGroupController.Units;
+            EnemyUnits = EnemyUnitGroupController.Units;
+        }
+
         // Use this for initialization
         void Start () {
             Stage        = transform.Find("Stage").gameObject;
@@ -82,20 +96,6 @@ namespace Combat {
             InitializeUnitGroups();
 
             CombatTimer.Every(turnInterval, OnTurn);
-        }
-
-        /// <summary>
-        /// Helper for initializing unit groups
-        /// </summary>
-        private void InitializeUnitGroups () {
-            GameObject playerUnitsObj = Stage.transform.Find("Player Units").gameObject;
-            GameObject enemyUnitsObj = Stage.transform.Find("Enemy Units").gameObject;
-
-            PlayerUnitGroupController = playerUnitsObj.GetComponent<UnitGroupController>();
-            EnemyUnitGroupController = enemyUnitsObj.GetComponent<UnitGroupController>();
-
-            PlayerUnits = PlayerUnitGroupController.Units;
-            EnemyUnits = EnemyUnitGroupController.Units;
         }
 
         /// <summary>
