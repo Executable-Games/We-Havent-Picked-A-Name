@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Combat.Units.Attacks {
+namespace Combat.Attacks {
     /// <summary>
     /// Basic Attack
     /// </summary>

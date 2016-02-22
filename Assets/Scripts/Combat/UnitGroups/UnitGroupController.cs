@@ -2,7 +2,7 @@
 using System.Collections;
 // NOTE(jordan): List
 using System.Collections.Generic;
-using Combat.Units;
+using Combat;
 
 namespace UnitGroups {
     /// <summary>

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace Combat.Units {
+namespace Combat {
     /// <summary>
     /// Script for handling health of units in combat
     /// </summary>

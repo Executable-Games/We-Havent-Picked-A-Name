@@ -8,7 +8,6 @@ using UnitGroups;
 using System.Linq;
 using GameEvents;
 using Combat.Events;
-using Combat.Units;
 
 namespace Combat {
     /// <summary>

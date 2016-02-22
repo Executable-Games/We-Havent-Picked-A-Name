@@ -1,4 +1,4 @@
-﻿namespace Combat.Units.Attacks {
+﻿namespace Combat.Attacks {
     /// <summary>
     /// Interface for Attack Components
     /// </summary>

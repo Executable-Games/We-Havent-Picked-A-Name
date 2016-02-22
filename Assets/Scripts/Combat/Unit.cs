@@ -3,7 +3,7 @@ using System.Collections;
 using GameEvents;
 using Combat.Events;
 
-namespace Combat.Units {
+namespace Combat {
     /// <summary>
     /// Unit script for managing combat units
     /// </summary>
