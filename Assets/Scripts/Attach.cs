@@ -11,16 +11,16 @@ public class Attach : MonoBehaviour {
 
     public AttachPoint attachPoint;
     public GameObject target;
-	
-	// Update is called once per frame
-	void Update () {
+    
+    // Update is called once per frame
+    void Update () {
         OnAttach();
-	}
+    }
 
     /// <summary>
     /// Enum for different possible attach points
     /// </summary>
-	public enum AttachPoint {
+    public enum AttachPoint {
         TopLeft, TopRight, BottomLeft, BottomRight, TopCenter, BottomCenter
     };
 
@@ -28,9 +28,9 @@ public class Attach : MonoBehaviour {
     /// Create the attach point
     /// </summary>
     void Start () 
-	{
+    {
         OnAttach();
-	}
+    }
 
     /// <summary>
     /// Attaches this object to 'target' at 'point'
@@ -38,7 +38,7 @@ public class Attach : MonoBehaviour {
     /// <param name="point">Point to attach to.</param>
     /// <param name="target">Target object.</param>
     void OnAttach ()
-	{
+    {
         //Bounds bounds = target.GetComponent<Mesh> ().bounds;
         Bounds bounds = target.GetComponent<Renderer>().bounds;
         float width = bounds.size.x;
@@ -68,5 +68,5 @@ public class Attach : MonoBehaviour {
             transform.position = new Vector3(targetX, targetY + height / 2, 0); 
             break;
         }
-	}
+    }
 }

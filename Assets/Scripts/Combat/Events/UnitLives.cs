@@ -1,5 +1,5 @@
 ﻿using EventSystem;
 
 namespace Combat.Events {
-    public class UnitLives : BasicEvent<UnitLives, Unit> { }
+    public class UnitLives : GameEvent<Unit> { }
 }
