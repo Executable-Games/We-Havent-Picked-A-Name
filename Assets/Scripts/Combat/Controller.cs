@@ -83,7 +83,7 @@ namespace Combat {
         }
 
         // Use this for initialization
-        void Start () {
+        void Awake () {
             Stage        = transform.Find("Stage").gameObject;
             CombatUI     = transform.Find("Combat UI").gameObject;
             CombatTimer  = GetComponent<Timer>();
