@@ -5,7 +5,7 @@
     /// Author: Jordan (GitHub: @skorlir)
     /// 2/14/16 - return from abs class to interface using properties
     /// 2/13/16
-    interface IAttack {
+    public interface IAttack {
         /// <summary>
         /// Amount of Damage an Attack will do
         /// </summary>

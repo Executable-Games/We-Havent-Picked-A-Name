@@ -22,6 +22,11 @@ namespace Combat {
         public Health Health;
 
         /// <summary>
+        /// Currently selected attack
+        /// </summary>
+        public IAttack CurrentlySelectedAttack;
+
+        /// <summary>
         /// Determines if the Unit is dead or not
         /// </summary>
         /// <returns>True if health is 0; otherwise, return False</returns>
@@ -33,6 +38,9 @@ namespace Combat {
 
         void Start () {
             Health = GetComponent<Health>();
+
+            // TODO(jordan): extract this into a MovesList class
+            CurrentlySelectedAttack = GetComponent<BasicAttack>();
 
             // !DEBUG(aaron)
             //Controller.CombatTimer.After(0.25f, () => Debug.Log("Hello from Unit!"));
