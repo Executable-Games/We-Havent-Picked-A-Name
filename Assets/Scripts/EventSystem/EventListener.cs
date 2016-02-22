@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 
 namespace EventSystem {
+    /// <summary>
+    /// Base class for EventListeners
+    /// </summary>
     public class EventListenerBase {
+        /// <summary>
+        /// Type of Event being listened to
+        /// </summary>
         protected Type _eventType;
 
+        /// <summary>
+        /// Property for _eventType
+        /// </summary>
         public Type EventType {
             get {
                 return _eventType;
@@ -12,6 +21,9 @@ namespace EventSystem {
         }
     }
 
+    /// <summary>
+    /// EventListener with parameterless callbacks
+    /// </summary>
     public class EventListener : EventListenerBase {
         private List<Action> _callbacks = new List<Action>();
 
@@ -30,6 +42,9 @@ namespace EventSystem {
         }
     }
 
+    /// <summary>
+    /// EventListener with one parameter callbacks
+    /// </summary>
     public class EventListener<P1> : EventListenerBase {
         private List<Action<P1>> _callbacks = new List<Action<P1>>();
 
@@ -48,6 +63,9 @@ namespace EventSystem {
         }
     }
 
+    /// <summary>
+    /// EventListener with two parameter callbacks
+    /// </summary>
     public class EventListener<P1, P2> : EventListenerBase {
         private List<Action<P1, P2>> _callbacks = new List<Action<P1, P2>>();
 
@@ -66,6 +84,9 @@ namespace EventSystem {
         }
     }
 
+    /// <summary>
+    /// EventListener with three parameter callbacks
+    /// </summary>
     public class EventListener<P1, P2, P3> : EventListenerBase {
         private List<Action<P1, P2, P3>> _callbacks = new List<Action<P1, P2, P3>>();
 
