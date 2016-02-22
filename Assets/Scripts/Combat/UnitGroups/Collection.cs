@@ -26,6 +26,13 @@ namespace Combat.UnitGroups {
             _index = -1;
         }
 
+        /// <summary>
+        /// Reset enumerator to end state.
+        /// </summary>
+        public void ResetReverse () {
+            _index = _units.Count;
+        }
+
         // NOTE(jordan): We also don't need this. A no-op is fine.
         void System.IDisposable.Dispose () { }
 
@@ -61,7 +68,19 @@ namespace Combat.UnitGroups {
         }
 
         /// <summary>
-        /// Cycles through
+        /// Decrements enumerable index
+        /// </summary>
+        /// <returns>Whether decrementing was successful</returns>
+        public bool MoveReverse () {
+            _index--;
+            if (_index < 0) {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Cycles through Units
         /// </summary>
         /// <returns>The next Unit in the cycle</returns>
         public Unit CycleNext () {
@@ -70,6 +89,20 @@ namespace Combat.UnitGroups {
             } else {
                 Reset();
                 MoveNext();
+                return Current;
+            }
+        }
+
+        /// <summary>
+        /// Cycles back through Units
+        /// </summary>
+        /// <returns></returns>
+        public Unit CycleReverse () {
+            if (MoveReverse()) {
+                return Current;
+            } else {
+                ResetReverse();
+                MoveReverse();
                 return Current;
             }
         }
@@ -84,6 +117,18 @@ namespace Combat.UnitGroups {
                 _index = _units.IndexOf(fromUnit);
             }
             return CycleNext();
+        }
+
+        /// <summary>
+        /// Cycle back through, starting from the Unit given
+        /// </summary>
+        /// <param name="fromUnit">Unit to cycle back from</param>
+        /// <returns>Unit that comes before fromUnit in cycle</returns>
+        public Unit CycleReverse (Unit fromUnit) {
+            if (_units.Contains(fromUnit)) {
+                _index = _units.IndexOf(fromUnit);
+            }
+            return CycleReverse();
         }
 
         /// <summary>
