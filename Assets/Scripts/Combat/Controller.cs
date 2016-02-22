@@ -69,11 +69,6 @@ namespace Combat {
         private UnitGroupController EnemyUnitGroupController;
         private UnitGroupController PlayerUnitGroupController;
 
-        // Run before Units Start
-        void Awake () {
-            EventSystem.On<UnitLives, Unit>((unit) => Debug.Log(string.Format("Unit {0} is alive!", unit)));
-        }
-
         // Use this for initialization
         void Start () {
             Stage        = transform.Find("Stage").gameObject;

@@ -40,8 +40,6 @@ namespace Combat.Units {
             Controller = transform.root.gameObject.GetComponent<Controller>();
             Health = GetComponent<Health>();
 
-            EventSystem.Trigger<UnitLives, Unit>(this);
-
             // !DEBUG(aaron)
             //Controller.CombatTimer.After(0.25f, () => Debug.Log("Hello from Unit!"));
         }
