@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EventSystem;
+using Combat.Events;
 
 /// <summary>
 /// Unit script for managing combat units
@@ -8,6 +10,10 @@ using System.Collections;
 /// 2/13/16 - add public Health
 /// 2/11/16
 public class Unit : MonoBehaviour {
+    /// <summary>
+    /// Reference to CombatController
+    /// </summary>
+    private CombatController Controller;
 
     /// <summary>
     /// Public player|enemy flag
@@ -30,10 +36,12 @@ public class Unit : MonoBehaviour {
     }
 
     void Start () {
-        Health = GetComponent<CombatHealth> ();
+        Controller = transform.root.gameObject.GetComponent<CombatController>();
+        Health = GetComponent<CombatHealth>();
+
+        EventManager.Trigger<UnitLives, Unit>(this);
 
         // !DEBUG(aaron)
-        //Timer Timer = GetComponentInParent<Timer>();
-        //Timer.After(0.25f, () => Debug.Log("Hello from Unit!"));
+        //Controller.CombatTimer.After(0.25f, () => Debug.Log("Hello from Unit!"));
     }
 }

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using UnitGroups;
 // NOTE(jordan): List.All
 using System.Linq;
+using EventSystem;
+using Combat.Events;
 
 /// <summary>
 /// Controller for the Combat Scene to figure out whose turn it is, etc.
@@ -41,7 +43,7 @@ public class CombatController : MonoBehaviour {
     /// Ref to fancy shmancy CombatTimer
     /// </summary>
     // NOTE(jordan): every combat item needing a timer should refer to THIS timer.
-    private Timer CombatTimer;
+    public Timer CombatTimer;
 
     /// <summary>
     /// The combat Stage object
@@ -80,6 +82,11 @@ public class CombatController : MonoBehaviour {
         return string.Format(turnOverTemplate, playerTurn ? playerTurnText : enemyTurnText);
     }
 
+    // Run before Units Start
+    void Awake () {
+        EventManager.On<UnitLives, Unit>((unit) => Debug.Log(string.Format("Unit {0} is alive!", unit)));
+    }
+
     // Use this for initialization
     void Start () {
         Stage        = transform.Find("Stage").gameObject;
@@ -93,6 +100,7 @@ public class CombatController : MonoBehaviour {
         InitializeUnitGroups();
 
         CombatTimer.Every(turnInterval, OnTurn);
+        EventManager.On<TurnOver>(() => Debug.Log(string.Format("Turn swap! {0}", TurnOverMessage())));
     }
 
     /// <summary>
@@ -125,6 +133,8 @@ public class CombatController : MonoBehaviour {
         UIController.SetMessage(TurnOverMessage());
         // NOTE(jordan): show message for 1/2 turnInterval seconds (needs to be less than turnInterval or it will show and hide at the same time ;) )
         UIController.Show(turnInterval / 2f);
+
+        EventManager.Trigger<TurnOver>();
     }
 
     /// <summary>
