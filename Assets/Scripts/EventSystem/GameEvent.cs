@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EventSystem {
+namespace GameEvents {
     /// <summary>
     /// Base class for GameEvents, which are Behaviours that can be placed in Unity
     /// </summary>
@@ -20,7 +20,7 @@ namespace EventSystem {
         void Awake () {
             Type t = GetType();
             InstantiateListener(t);
-            EventManager.Events.Add(t, this);
+            EventSystem.Events.Add(t, this);
             //// !DEBUG(jordan)
             //UnityEngineDebug.Log(string.Format("Registering Event. {0} {1} {2}", this, Listener, EventManager.Events));
         }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnitGroups;
 // NOTE(jordan): List.All
 using System.Linq;
-using EventSystem;
+using GameEvents;
 using Combat.Events;
 
 /// <summary>
@@ -84,7 +84,7 @@ public class CombatController : MonoBehaviour {
 
     // Run before Units Start
     void Awake () {
-        EventManager.On<UnitLives, Unit>((unit) => Debug.Log(string.Format("Unit {0} is alive!", unit)));
+        EventSystem.On<UnitLives, Unit>((unit) => Debug.Log(string.Format("Unit {0} is alive!", unit)));
     }
 
     // Use this for initialization
@@ -100,7 +100,7 @@ public class CombatController : MonoBehaviour {
         InitializeUnitGroups();
 
         CombatTimer.Every(turnInterval, OnTurn);
-        EventManager.On<TurnOver>(() => Debug.Log(string.Format("Turn swap! {0}", TurnOverMessage())));
+        EventSystem.On<TurnOver>(() => Debug.Log(string.Format("Turn swap! {0}", TurnOverMessage())));
     }
 
     /// <summary>
@@ -134,7 +134,7 @@ public class CombatController : MonoBehaviour {
         // NOTE(jordan): show message for 1/2 turnInterval seconds (needs to be less than turnInterval or it will show and hide at the same time ;) )
         UIController.Show(turnInterval / 2f);
 
-        EventManager.Trigger<TurnOver>();
+        EventSystem.Trigger<TurnOver>();
     }
 
     /// <summary>

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EventSystem {
+namespace GameEvents {
     /// <summary>
-    /// Global EventManager
+    /// Global EventSystem
     /// </summary>
-    public static class EventManager {
+    public static class EventSystem {
         /// <summary>
         /// Map of Events by Type
         /// </summary>

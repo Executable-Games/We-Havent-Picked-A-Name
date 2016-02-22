@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using EventSystem;
+using GameEvents;
 using Combat.Events;
 
 /// <summary>
@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour {
         Controller = transform.root.gameObject.GetComponent<CombatController>();
         Health = GetComponent<CombatHealth>();
 
-        EventManager.Trigger<UnitLives, Unit>(this);
+        EventSystem.Trigger<UnitLives, Unit>(this);
 
         // !DEBUG(aaron)
         //Controller.CombatTimer.After(0.25f, () => Debug.Log("Hello from Unit!"));

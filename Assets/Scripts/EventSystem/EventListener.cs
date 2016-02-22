@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EventSystem {
+namespace GameEvents {
     /// <summary>
     /// Base class for EventListeners
     /// </summary>
