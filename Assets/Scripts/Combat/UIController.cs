@@ -16,11 +16,6 @@ namespace Combat {
     /// 2/10/16
     public class UIController : MonoBehaviour {
         /// <summary>
-        /// Ref to CombatController
-        /// </summary>
-        private Controller Controller;
-
-        /// <summary>
         /// UIText object to show/hide/change
         /// </summary>
         private Text UIText;
@@ -62,7 +57,6 @@ namespace Combat {
         }
 
         void Start () {
-            Controller = transform.root.gameObject.GetComponent<Controller>();
             CombatTimer = Controller.CombatTimer;
             // NOTE(jordan): this only works because CombatUI only has 1 child, and it's the MessagePanel
             UIMessagePanel = gameObject.transform.GetChild(0).gameObject;

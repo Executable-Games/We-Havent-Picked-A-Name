@@ -12,17 +12,12 @@ namespace Combat {
     /// 2/11/16
     public class Unit : MonoBehaviour {
         /// <summary>
-        /// Reference to Combat Controller
-        /// </summary>
-        private Controller Controller;
-
-        /// <summary>
         /// Public player|enemy flag
         /// </summary>
         public bool isEnemy = true;
 
         /// <summary>
-        /// Reference to combat health
+        /// Unit's hit points
         /// </summary>
         public Health Health;
 
@@ -37,7 +32,6 @@ namespace Combat {
         }
 
         void Start () {
-            Controller = transform.root.gameObject.GetComponent<Controller>();
             Health = GetComponent<Health>();
 
             // !DEBUG(aaron)

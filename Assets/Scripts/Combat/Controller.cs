@@ -23,12 +23,24 @@ namespace Combat {
         /// Number of seconds in a turn
         /// </summary>
         // NOTE(jordan): 5 seconds for turns will probably be something we want to adjust
-        public readonly int turnInterval = 5;
+        public static readonly int turnInterval = 15;
 
         /// <summary>
         /// Public flag for whether it is the player's turn
         /// </summary>
-        public bool playerTurn = true;
+        public static bool playerTurn = true;
+
+        /// <summary>
+        /// Ref to fancy shmancy CombatTimer
+        /// </summary>
+        // NOTE(jordan): every combat item needing a timer should refer to THIS timer.
+        public static Timer CombatTimer;
+
+        /// <summary>
+        /// Enumerables of ally and enemy units
+        /// </summary>
+        public static UnitsCollection PlayerUnits;
+        public static UnitsCollection EnemyUnits;
 
         /// <summary>
         /// Ref to CombatUI child object
@@ -41,12 +53,6 @@ namespace Combat {
         private UIController UIController;
 
         /// <summary>
-        /// Ref to fancy shmancy CombatTimer
-        /// </summary>
-        // NOTE(jordan): every combat item needing a timer should refer to THIS timer.
-        public Timer CombatTimer;
-
-        /// <summary>
         /// The combat Stage object
         /// </summary>
         private GameObject Stage;
@@ -55,12 +61,6 @@ namespace Combat {
         /// The End Screen object
         /// </summary>
         private GameObject EndDisplay;
-
-        /// <summary>
-        /// Enumerables of ally and enemy units
-        /// </summary>
-        private UnitsCollection PlayerUnits;
-        private UnitsCollection EnemyUnits;
 
         /// <summary>
         /// UnitGroupControllers for player and enemy units
