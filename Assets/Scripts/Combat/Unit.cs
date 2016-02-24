@@ -27,7 +27,7 @@ namespace Combat {
         public IAttack CurrentlySelectedAttack;
 
         /// <summary>
-        /// Determines if the Unit is dead or not
+        /// Determines if the Unit is dead
         /// </summary>
         /// <returns>True if health is 0; otherwise, return False</returns>
         public bool isDead {
