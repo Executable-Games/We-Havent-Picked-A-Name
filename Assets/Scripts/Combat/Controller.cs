@@ -108,7 +108,7 @@ namespace Combat {
                     EnemyUnits.ForEach((enemy) => enemy.GetComponent<DumbAI>().TakeMove());
                 }
 
-                // NOTE(jordan): reset delay
+                // NOTE(jordan): turn timer back on, resetting interval
                 CombatTimer.Every(turnInterval, EventSystem.Trigger<TurnOver>);
             }
         }
