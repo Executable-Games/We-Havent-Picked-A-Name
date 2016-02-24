@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 /// Author: Jordan (GitHub: @skorlir)
@@ -194,6 +195,37 @@ namespace Combat.UnitGroups {
         /// <returns>True if u is in collection</returns>
         public bool Contains (Unit u) {
             return _units.Contains(u);
+        }
+
+        /// <summary>
+        /// Alias to collection ForEach
+        /// </summary>
+        /// <param name="action">Action to take with each unit</param>
+        public void ForEach (Action<Unit> action) {
+            _units.ForEach(action);
+        }
+
+        /// <summary>
+        /// Random number generator instance for getting a random unit
+        /// </summary>
+        private System.Random rng = new System.Random();
+
+        /// <summary>
+        /// Get a random unit
+        /// </summary>
+        /// <returns>Randomly selected unit</returns>
+        public Unit Random () {
+            return _units[rng.Next(_units.Count)];
+        }
+
+        /// <summary>
+        /// Get number of units
+        /// </summary>
+        /// <returns>Number of Units in collection</returns>
+        public int Count {
+            get {
+                return _units.Count;
+            }
         }
 
         /// <summary>
