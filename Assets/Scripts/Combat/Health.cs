@@ -84,7 +84,7 @@ namespace Combat {
         private void Die () {
             // NOTE(jordan): remove self from unit group
             GetComponentInParent<UnitGroupController>().Units.Remove(GetComponentInParent<Unit>());
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
