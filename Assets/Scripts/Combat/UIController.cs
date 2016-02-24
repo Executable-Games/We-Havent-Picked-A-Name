@@ -68,8 +68,6 @@ namespace Combat {
             UITextContainer = UIMessagePanel.transform.GetChild(0).gameObject;
             UIText = UITextContainer.GetComponent<Text>();
 
-            Reticle = transform.Find("Reticle").gameObject;
-
             // NOTE(jordan): perform UI changes when turn control swaps
             EventSystem.On<TurnOver>(() => {
                 // NOTE(jordan): set ui message
@@ -77,11 +75,6 @@ namespace Combat {
                 // NOTE(jordan): show message for 1 seconds (needs to be fewer than turnInterval)
                 Show(3f);
                 // NOTE(jordan): set player targeting reticle if playerTurn
-                if (Controller.playerTurn) {
-                    Reticle.SetActive(true);
-                } else {
-                    Reticle.SetActive(false);
-                }
             });
         }
 
