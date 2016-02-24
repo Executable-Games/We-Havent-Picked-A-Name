@@ -58,11 +58,6 @@ namespace Combat {
         private GameObject Stage;
 
         /// <summary>
-        /// The End Screen object
-        /// </summary>
-        private GameObject EndDisplay;
-
-        /// <summary>
         /// UnitGroupControllers for player and enemy units
         /// </summary>
         private UnitGroupController EnemyUnitGroupController;
@@ -88,9 +83,6 @@ namespace Combat {
             CombatUI     = transform.Find("Combat UI").gameObject;
             CombatTimer  = GetComponent<Timer>();
             UIController = CombatUI.GetComponent<UIController>();
-            EndDisplay   = UIController.EndScreen;
-
-            EndDisplay.SetActive(false);
 
             InitializeUnitGroups();
         }
@@ -107,7 +99,7 @@ namespace Combat {
             // NOTE(jordan): Stop timer
             CombatTimer.Remove(turnInterval, EventSystem.Trigger<TurnOver>);
 
-            if (!GameOver()) {
+            if (!IsGameOver()) {
                 // NOTE(jordan): switch turn
                 playerTurn = !playerTurn;
 
@@ -125,27 +117,23 @@ namespace Combat {
         /// Checks if game is over and performs appropriate actions if so
         /// </summary>
         /// <returns></returns>
-        private bool GameOver () {
+        private bool IsGameOver () {
+            bool gameOver = false;
+
             if (PlayerUnits.All((au) => au.isDead)) {
-                EndScreen(true);
-                return true;
+                UIController.ShowEndScreen(false);
+                gameOver = true;
+            } else if (EnemyUnits.All((eu) => eu.isDead)) {
+                UIController.ShowEndScreen(true);
+                gameOver = true;
             }
 
-            if (EnemyUnits.All((eu) => eu.isDead)) {
-                EndScreen(false);
-                return true;
+            if (gameOver) {
+                // NOTE(jordan): make sure timer is stopped
+                CombatTimer.Remove(turnInterval, EventSystem.Trigger<TurnOver>);
             }
 
-            return false;
-        }
-
-        /// <summary>
-        /// Displays the end screen
-        /// Different display based on victory of defeat (T/F)
-        /// </summary>
-        private void EndScreen (bool victory) {
-            //NOTE(aaron): not implemented yet
-            EndDisplay.SetActive(true);
+            return gameOver;
         }
     }
 }

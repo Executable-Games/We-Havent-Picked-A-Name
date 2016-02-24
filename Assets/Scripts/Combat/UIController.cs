@@ -35,6 +35,7 @@ namespace Combat {
         /// </summary>
         // NOTE(jordan): this object is set in the Unity Inspector
         public GameObject EndScreen;
+        private Text EndScreenText;
 
         /// <summary>
         /// Ref to CombatController CombatTimer component
@@ -67,6 +68,8 @@ namespace Combat {
             UIMessagePanel = gameObject.transform.GetChild(0).gameObject;
             UITextContainer = UIMessagePanel.transform.GetChild(0).gameObject;
             UIText = UITextContainer.GetComponent<Text>();
+            EndScreenText = EndScreen.transform.Find("Text").GetComponent<Text>();
+            EndScreen.SetActive(false);
 
             // NOTE(jordan): perform UI changes when turn control swaps
             EventSystem.On<TurnOver>(() => {
@@ -76,6 +79,11 @@ namespace Combat {
                 Show(3f);
                 // NOTE(jordan): set player targeting reticle if playerTurn
             });
+        }
+
+        public void ShowEndScreen (bool victory) {
+            EndScreenText.text = victory ? "<color=green>Victory!</color>" : "<color=red>Whups</color>";
+            EndScreen.SetActive(true);
         }
 
         /// <summary>
