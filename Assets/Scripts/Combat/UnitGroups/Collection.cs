@@ -229,10 +229,26 @@ namespace Combat.UnitGroups {
         }
 
         /// <summary>
+        /// Get currently alive units
+        /// </summary>
+        /// <returns>UnitsCollection of living units</returns>
+        public UnitsCollection Living () {
+            return new UnitsCollection(_units.FindAll((u) => !u.isDead));
+        }
+
+        /// <summary>
         /// Create a new enumerable UnitsCollection
         /// </summary>
         public UnitsCollection () {
             _units = new List<Unit>();
+        }
+
+        /// <summary>
+        /// Create a UnitsCollection from a list of Units
+        /// </summary>
+        /// <param name="units">List of Units to init with</param>
+        private UnitsCollection (List<Unit> units) {
+            _units = units;
         }
 
         /// <summary>
