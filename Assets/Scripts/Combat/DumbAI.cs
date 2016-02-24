@@ -10,29 +10,42 @@ namespace Combat {
         /// Tell AI to make a move
         /// </summary>
         public void TakeMove () {
-            Unit target = GetTarget();
-            float hitChance = Random.Range(0f, EnemyAttack.Accuracy);
-            if (hitChance >= 0.33f) {
-                EnemyAttack.PerformAttack(target);
+            if (HaveTargets()) {
+                Unit target = GetTarget();
+                float hitChance = Random.Range(0f, EnemyAttack.Accuracy);
+                if (hitChance >= 0.33f) {
+                    EnemyAttack.PerformAttack(target);
+                } else {
+                    Debug.Log(string.Format("Enemy {0} missed!", enemy));
+                }
             } else {
-                Debug.Log(string.Format("Enemy {0} missed!", enemy));
+                Debug.Log(string.Format("Enemy {0} has no valid targets.", enemy));
             }
         }
 
+        private bool HaveTargets () {
+            return Targets.Count > 0;
+        }
+
         private Unit GetTarget () {
-            return targetOptions.Random();
+            return Targets.Random();
         }
 
         public GameObject TargetGroup;
         public BasicAttack EnemyAttack;
 
-        private UnitsCollection targetOptions;
+        private UnitsCollection targets;
+        private UnitsCollection Targets {
+            get {
+                return targets.Living();
+            }
+        }
 
         private GameObject enemyObj;
         private Unit enemy;
 
         void Start () {
-            targetOptions = TargetGroup.GetComponent<UnitGroupController>().Units;
+            targets = TargetGroup.GetComponent<UnitGroupController>().Units;
             enemyObj = transform.parent.gameObject;
             enemy = enemyObj.GetComponent<Unit>();
         }
