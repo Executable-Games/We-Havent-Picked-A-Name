@@ -107,15 +107,18 @@ namespace Combat {
             // NOTE(jordan): Stop timer
             CombatTimer.Remove(turnInterval, EventSystem.Trigger<TurnOver>);
 
-            if (GameOver()) {
-                return;
+            if (!GameOver()) {
+                // NOTE(jordan): switch turn
+                playerTurn = !playerTurn;
+
+                // NOTE(jordan): tell enemies to act
+                if (!playerTurn) {
+                    EnemyUnits.ForEach((enemy) => enemy.GetComponent<DumbAI>().TakeMove());
+                }
+
+                // NOTE(jordan): reset delay
+                CombatTimer.Every(turnInterval, EventSystem.Trigger<TurnOver>);
             }
-
-            // NOTE(jordan): switch turn
-            playerTurn = !playerTurn;
-
-            // NOTE(jordan): reset delay
-            CombatTimer.Every(turnInterval, EventSystem.Trigger<TurnOver>);
         }
 
         /// <summary>
