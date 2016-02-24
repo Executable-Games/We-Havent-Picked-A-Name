@@ -82,8 +82,6 @@ namespace Combat {
         /// Perform cleanup and any other pre-death actions, then destroy this gameObject
         /// </summary>
         private void Die () {
-            // NOTE(jordan): remove self from unit group
-            GetComponentInParent<UnitGroupController>().Units.Remove(GetComponentInParent<Unit>());
             gameObject.SetActive(false);
         }
     }
