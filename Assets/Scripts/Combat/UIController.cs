@@ -43,11 +43,6 @@ namespace Combat {
         private Timer CombatTimer;
 
         /// <summary>
-        /// Reticle for targeting
-        /// </summary>
-        private GameObject Reticle;
-
-        /// <summary>
         /// Template strings for constructing a 'turn over!' message
         /// </summary>
         private string turnOverTemplate = "<b>Turn over!</b> It is now {0} turn.";
