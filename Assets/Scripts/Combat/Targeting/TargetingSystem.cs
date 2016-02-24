@@ -66,7 +66,7 @@ namespace Combat.Targeting {
                 SetState(Controller.EnemyUnits, Target);
             } else {
                 Reticle.State.AttachPoint = AttachPoint.TopRight;
-                SetState(Controller.PlayerUnits, Targeter);
+                SetState(MoveablePlayerUnits, Targeter);
             }
         }
 
@@ -97,8 +97,10 @@ namespace Combat.Targeting {
         /// Initialize reticle and targeting state to default
         /// </summary>
         private void Reinitialize () {
-            MoveablePlayerUnits = new UnitsCollection(Controller.PlayerUnits);
-            Currently = TargetingState.Selecting;
+            if (Controller.playerTurn) {
+                MoveablePlayerUnits = new UnitsCollection(Controller.PlayerUnits.Living());
+                Currently = TargetingState.Selecting;
+            }
         }
 
         /// <summary>
@@ -107,7 +109,7 @@ namespace Combat.Targeting {
         /// <param name="targets">Allowed targers</param>
         /// <param name="current">Initally selecte unit</param>
         private void SetState (UnitsCollection targets, Unit current) {
-            AllowedTargets = targets;
+            AllowedTargets = targets.Living();
             TargetsEnumerator = AllowedTargets.GetEnumerator();
             TargetsEnumerator.MoveNext();
             current = TargetsEnumerator.Current;
