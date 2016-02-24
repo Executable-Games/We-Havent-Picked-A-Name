@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System;
 
+using GameEvents;
+
 namespace Combat {
     using UnitGroups;
+    using Events;
     /// <summary>
     /// Script for handling health of units in combat
     /// </summary>
@@ -79,10 +82,11 @@ namespace Combat {
         }
 
         /// <summary>
-        /// Perform cleanup and any other pre-death actions, then destroy this gameObject
+        /// Hide on death
         /// </summary>
         private void Die () {
             gameObject.SetActive(false);
+            EventSystem.Trigger<UnitDeath>();
         }
     }
 }

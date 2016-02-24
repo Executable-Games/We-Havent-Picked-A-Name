@@ -90,6 +90,7 @@ namespace Combat {
         void Start () {
             CombatTimer.Every(turnInterval, EventSystem.Trigger<TurnOver>);
             EventSystem.On<TurnOver>(OnTurnOver);
+            EventSystem.On<UnitDeath>(() => IsGameOver());
         }
 
         /// <summary>
