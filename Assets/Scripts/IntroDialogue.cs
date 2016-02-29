@@ -18,6 +18,7 @@ public class IntroDialogue : MonoBehaviour {
 	public GameObject chalkboard;
 	public GameObject userPrompt;
 	public GameObject heroMusic;
+	public GameObject LoadingScreen;
 	public Vector3 adjust = new Vector3(); //How far the teacup is shifted on the screen after the chalkboard expands
 
 	public int musicCue; //at what point in the dialogue the music begins
@@ -55,8 +56,10 @@ public class IntroDialogue : MonoBehaviour {
 	}
 		
 	IEnumerator StopDialogue(){
-		yield return new WaitForSeconds (3f);
-		SceneManager.LoadScene(2);
+		LoadingScreen.SetActive (true);
+		yield return new WaitForSeconds (2f);
+		LoadingScreen.SetActive (true);
+		SceneManager.LoadScene(3);
 	}
 
 	void DialogueChange(int ind){

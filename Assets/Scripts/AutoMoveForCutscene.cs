@@ -11,8 +11,6 @@ public class AutoMoveForCutscene : MonoBehaviour {
 	public float stopRightDecimal; //should be between -2 and -0.5 , determines where(ish) the teacup stops moving to the right
 	public float stopUpDecimal; //should be between 0 and 1, determines where(ish) the teacup stops moving upward
 
-	void Start(){
-	}
 	void Update () {
 
 		if (transform.localPosition.x <= (Screen.width / 2) * stopRightDecimal)

@@ -8,8 +8,16 @@ using System.Collections;
 /// </summary>
 public class IntroScreenButtons : MonoBehaviour {
 
+	public GameObject buttonPanel;
+	public GameObject loadScreen;
+
+	void Start()
+	{
+		loadScreen.SetActive (false);
+	}
 	public void OnClickLoad(){
-		SceneManager.LoadScene (1);
+		loadScreen.SetActive (true);
+		SceneManager.LoadScene (2);
 	}
 	//only works in builds, not in the editor
 	public void OnClickExit(){
