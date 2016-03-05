@@ -23,3 +23,8 @@ obj
 .Spotlight-V100
 ehthumbs.db
 Thumbs.db
+
+# builds and assoc. files
+*.pdb
+*.exe
+*_Data/
