@@ -24,6 +24,7 @@ namespace Attach {
 
         public AttachPoint attachPoint;
         public GameObject attachTarget;
+        public float padding;
 
         private Bounds targetBounds;
         private Vector3 targetPosition;
@@ -71,7 +72,7 @@ namespace Attach {
             targetPosition = attachTarget.transform.position;
 
             float width = targetBounds.size.x;
-            float height = targetBounds.size.y;
+            float height = targetBounds.size.y + padding;
             float attachTargetX = targetPosition.x;
             float attachTargetY = targetPosition.y;
             //NOTE (aaron): Ideally this would be independent of anchor/pivot position, but I cannot find a way to abstract

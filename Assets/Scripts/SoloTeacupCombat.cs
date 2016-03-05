@@ -45,7 +45,9 @@ public class SoloTeacupCombat : MonoBehaviour {
 		if (ind == 5) {
 			
 			timer.After (1f, TriggerChoice);
+
 		}
+
 	}
 		
 	void AddDialogue(){
@@ -59,6 +61,7 @@ public class SoloTeacupCombat : MonoBehaviour {
 	void TriggerChoice()
 	{
 		choicePanel.SetActive (true);
+        teacupDialogue.SetActive(false);
 
 	}
 
