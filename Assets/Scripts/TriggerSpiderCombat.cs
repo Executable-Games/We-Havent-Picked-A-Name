@@ -7,8 +7,6 @@ public class TriggerSpiderCombat : MonoBehaviour {
 	public GameObject Target;
 	public Material TargetMaterial;
 	public GameObject loadingScreen;
-	public float repeatValue;
-	public Vector2 increaseSpeed = new Vector2 ();
 
 	void Start () {
 		TargetMaterial.color = Color.black;

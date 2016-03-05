@@ -8,6 +8,7 @@ public class SoloTeacupCombat : MonoBehaviour {
 	public GameObject enemyInfo;
 	public GameObject teacupDialogue;
 	public GameObject choicePanel;
+	public Timer timer;
 
 	private int index = 0;
 	private ArrayList dialogue = new ArrayList ();
@@ -24,20 +25,26 @@ public class SoloTeacupCombat : MonoBehaviour {
 
 	void Update () {
 		if (Input.GetKeyDown ("space")) {
-			DialogueChange (index);
 			index += 1;
+			DialogueChange (index);
+
 		}
 	}
 	void DialogueChange(int ind){
 		
 		teacupDialogue.GetComponentInChildren<Text> ().text = (string)dialogue[index];		
 
+		if (ind == 1) {
+			battlePrompt.GetComponentInChildren<Text> ().text = "press spacebar.";
+
+		}
 		if (ind == 2) {
 			battlePrompt.GetComponentInChildren<Text> ().text = "Welcome to combat. Be prepared to think quick and chortle quietly to yourself. Know your self. Know your enemy. Actually here, check out this oversized information box.";
 			enemyInfo.SetActive (true);
 		}
 		if (ind == 5) {
-			TriggerChoice ();
+			
+			timer.After (1f, TriggerChoice);
 		}
 	}
 		
