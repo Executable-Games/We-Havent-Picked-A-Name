@@ -44,8 +44,7 @@ public class ChoiceButtonsSpiders : MonoBehaviour {
         combat.changeTrack(1);
     }
     public void TriggerZeroTwo(){
-        //option2Panel.SetActive (true);
-        //loseChoice = true;
+        combat.changeTrack (4);
     }
     public void TriggerOneOne(){
         combat.changeTrack (2);
@@ -68,6 +67,28 @@ public class ChoiceButtonsSpiders : MonoBehaviour {
     }
     public void TriggerThreeTwo(){
         winChoice = true;
-        winPanel.GetComponentInChildren<Text> ().text = "*spiders look kind of confused* You run past them in their confusion, and have escaped! Great job, you filthy coward.";
+        winPanel.GetComponentInChildren<Text> ().text = "*spiders look kind of confused* \nYou run past them in their confusion, and have escaped! Great job, you filthy coward.";
+    }
+    public void TriggerFourOne(){
+        loseChoice = true;
+        losePanel.GetComponentInChildren<Text> ().text = "There are like 30 of them. You definitely died. You’re a terrible strategist.";
+    }
+    public void TriggerFourTwo(){
+        combat.changeTrack (5);
+    }
+    public void TriggerFiveOne(){
+        loseChoice = true;
+        losePanel.GetComponentInChildren<Text> ().text = "You died. Did you really think provoking the spider gang would be a good idea? Doofus.";
+    }
+    public void TriggerFiveTwo(){
+        combat.changeTrack (6);
+    }
+    public void TriggerSixOne(){
+        winChoice = true;
+        winPanel.GetComponentInChildren<Text> ().text = "*spiders nod excitedly and hurry away* \nGood job matey! You helped a few stray spiders who were down on their luck. What a mensch!";
+    }
+    public void TriggerSixTwo(){
+        winChoice = true;
+        winPanel.GetComponentInChildren<Text> ().text = "*spiders guiltily look to the ground and mumble something about you not being their ‘mother’*\nHey, nice going! You guilt-tripped the spider gang into letting you pass. Don’t be too happy though. It was still kind of a dick move on your part.";
     }
 }

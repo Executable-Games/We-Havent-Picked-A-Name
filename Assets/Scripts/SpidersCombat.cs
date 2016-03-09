@@ -13,6 +13,7 @@ public class SpidersCombat : MonoBehaviour {
     public GameObject choicePanel4;
     public GameObject choicePanel5;
     public GameObject choicePanel6;
+    public GameObject choicePanel7;
     public Timer timer;
 
     private int index = 0;
@@ -25,6 +26,9 @@ public class SpidersCombat : MonoBehaviour {
         choicePanel2.SetActive(false);
         choicePanel3.SetActive(false);
         choicePanel4.SetActive (false);
+        choicePanel5.SetActive (false);
+        choicePanel6.SetActive (false);
+        choicePanel7.SetActive (false);
         teacupDialogue.SetActive (true);
         teacupDialogue.GetComponentInChildren<Text> ().text = (string)dialogue[index];      
         battlePrompt.SetActive (true);
@@ -61,6 +65,12 @@ public class SpidersCombat : MonoBehaviour {
         } else if (current_track == 2 && ind == 15) {
             timer.After (0.1f, TriggerChoice);
         } else if (current_track == 3 && ind == 12) {
+            timer.After (0.1f, TriggerChoice);
+        } else if (current_track == 4 && ind == 6) {
+            timer.After (0.1f, TriggerChoice);
+        } else if (current_track == 5 && ind == 12) {
+            timer.After (0.1f, TriggerChoice);
+        } else if (current_track == 6 && ind == 15) {
             timer.After (0.1f, TriggerChoice);
         }
 
@@ -107,6 +117,35 @@ public class SpidersCombat : MonoBehaviour {
             dialogue.Add ("*spiders don’t do anything in particular to indicate disdain towards ur’lady*");
             dialogue.Add ("");
         }
+
+        //Peggy dialogue
+        if (ind == 4) {
+            choicePanel1.SetActive (false);
+            teacupDialogue.SetActive(true);
+            current_track = 4;
+            dialogue.Add ("Argh, what’r you lot looking at?");
+            dialogue.Add ("*spiders scuttle threateningly*");
+            dialogue.Add ("");
+        }
+        if (ind == 5) {
+            choicePanel5.SetActive (false);
+            teacupDialogue.SetActive(true);
+            current_track = 5;
+            dialogue.Add ("*spiders spread out and appear to take defensive positions*");
+            dialogue.Add ("Looks like they’re making a pretty wide web!");
+            dialogue.Add ("Maybe, a world-wide web!");
+            dialogue.Add ("Har-har-har!");
+            dialogue.Add ("So anyways….");
+            dialogue.Add ("");
+        }
+        if (ind == 6) {
+            choicePanel6.SetActive (false);
+            teacupDialogue.SetActive(true);
+            current_track = 6;
+            dialogue.Add ("*spiders scuttle in reluctant agreement*");
+            dialogue.Add ("I’ll tell you what, how about…");
+            dialogue.Add ("");
+        }
         index += 1;
         DialogueChange (index);
     }
@@ -121,6 +160,12 @@ public class SpidersCombat : MonoBehaviour {
             choicePanel3.SetActive (true);
         else if (current_track == 3)
             choicePanel4.SetActive (true);
+        else if (current_track == 4)
+            choicePanel5.SetActive (true);
+        else if (current_track == 5)
+            choicePanel6.SetActive (true);
+        else if (current_track == 6)
+            choicePanel7.SetActive (true);
         teacupDialogue.SetActive(false);
 
     }
