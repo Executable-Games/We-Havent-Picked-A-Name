@@ -10,6 +10,7 @@ public class ChoiceButtons : MonoBehaviour {
 	public GameObject option2Panel;
 	public GameObject option3Panel;
 	public GameObject option4Panel;
+    public GameObject Combat;
 	public GameObject winPanel;
 	public GameObject losePanel;
 	public Timer timer;
