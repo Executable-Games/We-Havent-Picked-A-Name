@@ -18,6 +18,7 @@ public class IntroDialogue : MonoBehaviour {
 	public GameObject chalkboard;
 	public GameObject userPrompt;
 	public GameObject heroMusic;
+    public GameObject currentMusic;
 	public GameObject LoadingScreen;
 	public Vector3 adjust = new Vector3(); //How far the teacup is shifted on the screen after the chalkboard expands
 
@@ -81,6 +82,7 @@ public class IntroDialogue : MonoBehaviour {
 			chalkboard.SetActive (false);
 		}
 		if (ind == musicCue) {
+            currentMusic.SetActive(false);
 			heroMusic.SetActive (true);
 		}
 	}
